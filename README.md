@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Ventures & Business Innovation — Executive Proposal for GFT Technologies
 
-## Getting Started
+An independent, interactive executive proposal by **Andrés García Montoya** for the role of
+**Head of AI Ventures & Business Innovation** at GFT Technologies, addressed to Rohan Malik,
+COO Andean Region.
 
-First, run the development server:
+> From Artificial Intelligence to Business Opportunities. From Opportunities to Revenue.
+
+This is not an official GFT website. It is a personal professional proposal.
+
+## Stack
+
+- Next.js 16 (App Router, Cache Components, static prerender)
+- React 19 + TypeScript
+- Tailwind CSS v4 with design tokens in `src/app/globals.css`
+- shadcn/ui-style primitives (Radix UI + class-variance-authority) in `src/components/ui`
+- Motion for React (animations, reduced-motion aware)
+- Recharts (capability radar, pipeline scenario)
+- Lucide icons
+
+No API keys, authentication, or database are required. Deploys to Vercel with zero configuration.
+
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Production build and checks:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run lint
+npm run build
+npm start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Updating the proposal content
 
-## Learn More
+All copy, opportunities, roadmap, KPIs and candidate data live in `src/content/` as typed
+configuration objects. Components only render what they are given.
 
-To learn more about Next.js, take a look at the following resources:
+| File | What it controls |
+| --- | --- |
+| `site.ts` | Candidate identity, contact, email subject, navigation, disclaimer |
+| `hero.ts` | Hero headline, description, CTAs, hero network nodes |
+| `why-gft.ts` | Verified GFT facts, proposed opportunities, pillars, source links |
+| `engine.ts` | The six-stage framework and the venture lifecycle labels |
+| `opportunities.ts` | Five industries and 25 opportunity hypotheses with full detail |
+| `profile.ts` | Why Andrés: summary, advantages, capabilities, radar, education, recognition |
+| `experience.ts` | Career timeline, highlights, metric cards |
+| `impact.ts` | Scorecard KPIs, value framework, hypothetical pipeline scenario defaults |
+| `roadmap.ts` | First 90 days |
+| `fit.ts` | Proposed role, mission, responsibilities, collaborators |
+| `availability.ts` | Availability facts and map regions |
+| `closing.ts` | Final call to action |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Assets
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `public/documents/Andres-Garcia-Montoya-CV.pdf` — the downloadable CV. Replace the file to update it; the
+  path and filename are configured in `src/content/site.ts`.
+- `public/images/` — place the candidate's real photograph here and set `site.candidate.photo` to its path.
+  No portrait is generated or substituted; while `photo` is `null` the site shows monogram marks.
 
-## Deploy on Vercel
+## Features
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Sticky navigation with scroll progress and section indicator
+- **Presentation Mode**: fullscreen slides, arrow-key navigation, Esc to exit
+- **Executive Summary** at `/executive-summary`: one-page, print-friendly, exportable to PDF
+- Interactive AI Business Opportunity Engine (clickable stages)
+- AI Opportunity Explorer with industry selector, filters by business value and commercial model, and detail dialogs
+- Editable, clearly labelled hypothetical pipeline scenario (no financial projections)
+- Dark theme by default with light mode, reduced-motion support, keyboard-accessible controls
+- SEO metadata, Open Graph image, sitemap and robots
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Content rules observed
+
+- GFT facts are limited to public communications and are visually separated from proposed ideas.
+- All opportunities are presented as hypotheses, not existing GFT products or confirmed demand.
+- No invented revenue, investment, customer figures, testimonials or endorsements.
