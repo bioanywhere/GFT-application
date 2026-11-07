@@ -3,8 +3,8 @@ import type { IconName } from "./types";
 export const compareRoles = {
   ai: {
     id: "ai",
-    name: "Head of AI",
-    short: "Head of AI",
+    name: "CAIO — Chief AI Officer",
+    short: "CAIO",
     tagline: "Make AI work effectively across the organization.",
     orientation: "Execution-oriented",
     color: "var(--accent-cyan)",
@@ -14,8 +14,8 @@ export const compareRoles = {
   },
   ventures: {
     id: "ventures",
-    name: "Head of AI Ventures & Business Innovation",
-    short: "Head of AI Ventures",
+    name: "Chief AI Ventures Officer (CAIVO)",
+    short: "CAIVO",
     tagline: "Turn AI into new business opportunities and revenue.",
     orientation: "Growth-oriented",
     color: "var(--accent-violet)",
@@ -29,9 +29,9 @@ export const compareHero = {
   eyebrow: "Strategic Comparison · Two Executive Leadership Contributions",
   headline: "Two Ways to Contribute to GFT's AI Future.",
   description:
-    "Head of AI makes AI work across the organization: strategy, engineering, adoption, governance, scale. Head of AI Ventures & Business Innovation turns AI into new businesses: opportunities, products, markets, revenue. Both are proposed by the same candidate. They are alternatives, not a package.",
+    "CAIO makes AI work across the organization: strategy, engineering, adoption, governance, scale. Chief AI Ventures Officer (CAIVO) turns AI into new businesses: opportunities, products, markets, revenue. Both are proposed by the same candidate. They are alternatives, not a package.",
   chain: ["AI Strategy", "AI Capabilities", "Business Innovation", "Commercialization", "Revenue Growth"],
-  chainNote: "Head of AI owns the first half of this chain. Head of AI Ventures owns the second. Either role strengthens the whole.",
+  chainNote: "CAIO owns the first half of this chain. CAIVO owns the second. Either role strengthens the whole.",
 };
 
 export interface CompareDimension {
@@ -64,11 +64,11 @@ export const compareFocus = {
   intro:
     "Qualitative positioning of each role across five dimensions. Levels are Primary, Strong, and Supporting. They describe where each role concentrates its attention, not a numerical assessment.",
   axes: [
-    { axis: "Technology", ai: 3 as Emphasis, ventures: 2 as Emphasis, note: "Head of AI owns architecture and engineering; Ventures uses technology to shape sellable products." },
-    { axis: "Strategy", ai: 3 as Emphasis, ventures: 2 as Emphasis, note: "Head of AI sets the AI roadmap; Ventures sets the growth thesis for new businesses." },
-    { axis: "Innovation", ai: 2 as Emphasis, ventures: 3 as Emphasis, note: "Head of AI innovates in how AI is built and run; Ventures innovates in what businesses AI makes possible." },
-    { axis: "Operations", ai: 3 as Emphasis, ventures: 1 as Emphasis, note: "Head of AI is accountable for production systems and operational transformation." },
-    { axis: "Business Development", ai: 1 as Emphasis, ventures: 3 as Emphasis, note: "Ventures lives with customers, partners, and pipeline; Head of AI supports sales with solution design." },
+    { axis: "Technology", ai: 3 as Emphasis, ventures: 2 as Emphasis, note: "CAIO owns architecture and engineering; Ventures uses technology to shape sellable products." },
+    { axis: "Strategy", ai: 3 as Emphasis, ventures: 2 as Emphasis, note: "CAIO sets the AI roadmap; Ventures sets the growth thesis for new businesses." },
+    { axis: "Innovation", ai: 2 as Emphasis, ventures: 3 as Emphasis, note: "CAIO innovates in how AI is built and run; Ventures innovates in what businesses AI makes possible." },
+    { axis: "Operations", ai: 3 as Emphasis, ventures: 1 as Emphasis, note: "CAIO is accountable for production systems and operational transformation." },
+    { axis: "Business Development", ai: 1 as Emphasis, ventures: 3 as Emphasis, note: "Ventures lives with customers, partners, and pipeline; CAIO supports sales with solution design." },
   ],
   spectrum: [
     { left: "Improve how GFT delivers AI", right: "Create new businesses with AI", aiPos: 18, venturesPos: 84 },
@@ -130,7 +130,7 @@ export const compareImpact = {
 export const compareModel = {
   title: "Complementary Leadership Model",
   intro:
-    "If GFT ever chose to pursue both directions, the two functions would reinforce each other. Head of AI builds and runs the capability base; Head of AI Ventures turns that base into new businesses and feeds market demand back into the roadmap. This is a model of how they relate, not a recommendation to create both positions.",
+    "If GFT ever chose to pursue both directions, the two functions would reinforce each other. CAIO builds and runs the capability base; CAIVO turns that base into new businesses and feeds market demand back into the roadmap. This is a model of how they relate, not a recommendation to create both positions.",
   loop: [
     { id: "strategy", label: "AI strategy & roadmap", owner: "ai" as const },
     { id: "capabilities", label: "Platforms, engineering, governance", owner: "ai" as const },
@@ -140,13 +140,13 @@ export const compareModel = {
     { id: "feedback", label: "Market demand feeds back into the roadmap", owner: "both" as const },
   ],
   handoffs: [
-    { from: "Head of AI", to: "Head of AI Ventures", what: "Production-ready capabilities, reference architectures, and delivery capacity that make new offerings credible and fast to build." },
-    { from: "Head of AI Ventures", to: "Head of AI", what: "Validated customer problems, pricing signals, and new-market requirements that sharpen the AI roadmap and platform priorities." },
+    { from: "CAIO", to: "CAIVO", what: "Production-ready capabilities, reference architectures, and delivery capacity that make new offerings credible and fast to build." },
+    { from: "CAIVO", to: "CAIO", what: "Validated customer problems, pricing signals, and new-market requirements that sharpen the AI roadmap and platform priorities." },
     { from: "Both", to: "GFT leadership", what: "One coherent story: AI that works in production and AI that opens new revenue, measured on a shared scorecard." },
   ],
   message: {
-    ai: "Head of AI ensures that AI is strategically adopted, technically executed, effectively governed, and successfully scaled.",
-    ventures: "Head of AI Ventures & Business Innovation ensures that AI is continuously leveraged to discover new opportunities, create innovative products, enter new markets, and generate additional business revenue.",
+    ai: "CAIO ensures that AI is strategically adopted, technically executed, effectively governed, and successfully scaled.",
+    ventures: "Chief AI Ventures Officer (CAIVO) ensures that AI is continuously leveraged to discover new opportunities, create innovative products, enter new markets, and generate additional business revenue.",
     caveat: "These are two alternative ways the candidate could contribute to GFT's growth, depending on its organizational priorities. The comparison does not suggest that GFT must create both positions.",
   },
 };
@@ -154,7 +154,7 @@ export const compareModel = {
 export const compareFit = {
   title: "My Unique Fit for Either Role",
   intro:
-    "The same four strengths support both proposals. What changes is which ones lead. For Head of AI, engineering depth and CTO leadership lead. For Head of AI Ventures, entrepreneurship and cross-industry business development lead.",
+    "The same four strengths support both proposals. What changes is which ones lead. For CAIO, engineering depth and CTO leadership lead. For CAIVO, entrepreneurship and cross-industry business development lead.",
   strengths: [
     { id: "engineering", title: "Hands-on AI engineering", icon: "Cpu" as IconName, evidence: "Designed and built production LLM, RAG, agentic, and voice-AI systems at Bioanywhere and SDG Investors.", ai: 3 as Emphasis, ventures: 2 as Emphasis },
     { id: "cto", title: "CTO leadership", icon: "Building2" as IconName, evidence: "Led technology strategy, international engineering teams, and enterprise architecture at Legado; founder-CTO at mindtalks.ai.", ai: 3 as Emphasis, ventures: 2 as Emphasis },
@@ -183,7 +183,7 @@ export const compareClosing = {
   headline: "One Candidate. Two Ways to Create Value.",
   text:
     "Whichever contribution GFT prioritizes, the goal is the same: connect artificial intelligence, technology leadership, business strategy, and entrepreneurship into measurable results for GFT and its clients.",
-  emailSubject: "Head of AI / AI Ventures — GFT Technologies",
+  emailSubject: "CAIO / CAIVO — GFT Technologies",
 };
 
 export type CompareSectionId = "cmp-hero" | "cmp-table" | "cmp-focus" | "cmp-impact" | "cmp-model" | "cmp-fit" | "cmp-guide" | "cmp-contact";

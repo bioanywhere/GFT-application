@@ -9,8 +9,8 @@ export interface ProposalTab {
 }
 
 export const proposals: ProposalTab[] = [
-  { id: "ventures", path: "/", label: "Head of AI Ventures", short: "AI Ventures", title: "Head of AI Ventures & Business Innovation", tone: "growth" },
-  { id: "ai", path: "/head-of-ai", label: "Head of AI", short: "Head of AI", title: "Head of AI", tone: "execution" },
+  { id: "ventures", path: "/", label: "Chief AI Ventures Officer", short: "CAIVO", title: "Chief AI Ventures Officer (CAIVO)", tone: "growth" },
+  { id: "ai", path: "/head-of-ai", label: "Chief AI Officer", short: "CAIO", title: "CAIO — Chief AI Officer", tone: "execution" },
   { id: "compare", path: "/compare", label: "Compare Both", short: "Compare", title: "Strategic Comparison", tone: "neutral" },
 ];
 

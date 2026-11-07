@@ -18,17 +18,17 @@ const navLabels: Record<(typeof enCompareNavigation)[number]["id"], string> = {
 export const compareNavigation = enCompareNavigation.map((n) => ({ id: n.id, label: navLabels[n.id] }));
 
 export const compareRoles: typeof enCompareRoles = {
-  ai: { id: "ai", name: "Head of AI", short: "Head of AI", tagline: "Hacer que la IA funcione con eficacia en toda la organización.", orientation: "Orientado a la ejecución", color: "var(--accent-cyan)", color2: "var(--accent-emerald)", href: "/head-of-ai", icon: "Cpu" },
-  ventures: { id: "ventures", name: "Head of AI Ventures & Business Innovation", short: "Head of AI Ventures", tagline: "Convertir la IA en nuevas oportunidades de negocio e ingresos.", orientation: "Orientado al crecimiento", color: "var(--accent-violet)", color2: "var(--accent-magenta)", href: "/", icon: "Rocket" },
+  ai: { id: "ai", name: "CAIO — Chief AI Officer", short: "CAIO", tagline: "Hacer que la IA funcione con eficacia en toda la organización.", orientation: "Orientado a la ejecución", color: "var(--accent-cyan)", color2: "var(--accent-emerald)", href: "/head-of-ai", icon: "Cpu" },
+  ventures: { id: "ventures", name: "Chief AI Ventures Officer (CAIVO)", short: "CAIVO", tagline: "Convertir la IA en nuevas oportunidades de negocio e ingresos.", orientation: "Orientado al crecimiento", color: "var(--accent-violet)", color2: "var(--accent-magenta)", href: "/", icon: "Rocket" },
 };
 
 export const compareHero: typeof enCompareHero = {
   eyebrow: "Comparación estratégica · Dos contribuciones de liderazgo ejecutivo",
   headline: "Dos formas de contribuir al futuro de la IA en GFT.",
   description:
-    "Head of AI hace que la IA funcione en toda la organización: estrategia, ingeniería, adopción, gobernanza, escala. Head of AI Ventures & Business Innovation convierte la IA en nuevos negocios: oportunidades, productos, mercados, ingresos. Ambas las propone el mismo candidato. Son alternativas, no un paquete.",
+    "CAIO hace que la IA funcione en toda la organización: estrategia, ingeniería, adopción, gobernanza, escala. Chief AI Ventures Officer (CAIVO) convierte la IA en nuevos negocios: oportunidades, productos, mercados, ingresos. Ambas las propone el mismo candidato. Son alternativas, no un paquete.",
   chain: ["Estrategia de IA", "Capacidades de IA", "Innovación de negocio", "Comercialización", "Crecimiento de ingresos"],
-  chainNote: "Head of AI es dueño de la primera mitad de esta cadena. Head of AI Ventures, de la segunda. Cualquiera de los dos roles fortalece el conjunto.",
+  chainNote: "CAIO es dueño de la primera mitad de esta cadena. CAIVO, de la segunda. Cualquiera de los dos roles fortalece el conjunto.",
 };
 
 export const compareDimensions: CompareDimension[] = [
@@ -53,11 +53,11 @@ export const compareFocus: typeof enCompareFocus = {
   intro:
     "Posicionamiento cualitativo de cada rol en cinco dimensiones. Los niveles son Principal, Fuerte y De apoyo. Describen dónde concentra su atención cada rol, no una evaluación numérica.",
   axes: [
-    { axis: "Tecnología", ai: 3, ventures: 2, note: "Head of AI es dueño de la arquitectura y la ingeniería; Ventures usa la tecnología para dar forma a productos vendibles." },
-    { axis: "Estrategia", ai: 3, ventures: 2, note: "Head of AI define la hoja de ruta de IA; Ventures define la tesis de crecimiento de los nuevos negocios." },
-    { axis: "Innovación", ai: 2, ventures: 3, note: "Head of AI innova en cómo se construye y opera la IA; Ventures innova en qué negocios hace posibles la IA." },
-    { axis: "Operaciones", ai: 3, ventures: 1, note: "Head of AI es responsable de los sistemas en producción y de la transformación operativa." },
-    { axis: "Desarrollo de negocio", ai: 1, ventures: 3, note: "Ventures vive con clientes, socios y pipeline; Head of AI apoya a ventas con el diseño de soluciones." },
+    { axis: "Tecnología", ai: 3, ventures: 2, note: "CAIO es dueño de la arquitectura y la ingeniería; Ventures usa la tecnología para dar forma a productos vendibles." },
+    { axis: "Estrategia", ai: 3, ventures: 2, note: "CAIO define la hoja de ruta de IA; Ventures define la tesis de crecimiento de los nuevos negocios." },
+    { axis: "Innovación", ai: 2, ventures: 3, note: "CAIO innova en cómo se construye y opera la IA; Ventures innova en qué negocios hace posibles la IA." },
+    { axis: "Operaciones", ai: 3, ventures: 1, note: "CAIO es responsable de los sistemas en producción y de la transformación operativa." },
+    { axis: "Desarrollo de negocio", ai: 1, ventures: 3, note: "Ventures vive con clientes, socios y pipeline; CAIO apoya a ventas con el diseño de soluciones." },
   ],
   spectrum: [
     { left: "Mejorar cómo GFT entrega IA", right: "Crear nuevos negocios con IA", aiPos: 18, venturesPos: 84 },
@@ -91,7 +91,7 @@ export const compareImpact: typeof enCompareImpact = {
 export const compareModel: typeof enCompareModel = {
   title: "Modelo de liderazgo complementario",
   intro:
-    "Si GFT decidiera alguna vez seguir ambas direcciones, las dos funciones se reforzarían mutuamente. Head of AI construye y opera la base de capacidades; Head of AI Ventures convierte esa base en nuevos negocios y devuelve la demanda del mercado a la hoja de ruta. Es un modelo de cómo se relacionan, no una recomendación de crear ambas posiciones.",
+    "Si GFT decidiera alguna vez seguir ambas direcciones, las dos funciones se reforzarían mutuamente. CAIO construye y opera la base de capacidades; CAIVO convierte esa base en nuevos negocios y devuelve la demanda del mercado a la hoja de ruta. Es un modelo de cómo se relacionan, no una recomendación de crear ambas posiciones.",
   loop: [
     { id: "strategy", label: "Estrategia y hoja de ruta de IA", owner: "ai" },
     { id: "capabilities", label: "Plataformas, ingeniería, gobernanza", owner: "ai" },
@@ -101,13 +101,13 @@ export const compareModel: typeof enCompareModel = {
     { id: "feedback", label: "La demanda del mercado retroalimenta la hoja de ruta", owner: "both" },
   ],
   handoffs: [
-    { from: "Head of AI", to: "Head of AI Ventures", what: "Capacidades listas para producción, arquitecturas de referencia y capacidad de entrega que hacen creíbles y rápidas de construir las nuevas ofertas." },
-    { from: "Head of AI Ventures", to: "Head of AI", what: "Problemas de clientes validados, señales de precio y requisitos de nuevos mercados que afinan la hoja de ruta de IA y las prioridades de plataforma." },
+    { from: "CAIO", to: "CAIVO", what: "Capacidades listas para producción, arquitecturas de referencia y capacidad de entrega que hacen creíbles y rápidas de construir las nuevas ofertas." },
+    { from: "CAIVO", to: "CAIO", what: "Problemas de clientes validados, señales de precio y requisitos de nuevos mercados que afinan la hoja de ruta de IA y las prioridades de plataforma." },
     { from: "Ambos", to: "Liderazgo de GFT", what: "Una sola historia coherente: IA que funciona en producción e IA que abre nuevos ingresos, medida en un cuadro de mando compartido." },
   ],
   message: {
-    ai: "Head of AI asegura que la IA se adopte estratégicamente, se ejecute técnicamente, se gobierne con eficacia y se escale con éxito.",
-    ventures: "Head of AI Ventures & Business Innovation asegura que la IA se aproveche continuamente para descubrir nuevas oportunidades, crear productos innovadores, entrar en nuevos mercados y generar ingresos adicionales.",
+    ai: "CAIO asegura que la IA se adopte estratégicamente, se ejecute técnicamente, se gobierne con eficacia y se escale con éxito.",
+    ventures: "Chief AI Ventures Officer (CAIVO) asegura que la IA se aproveche continuamente para descubrir nuevas oportunidades, crear productos innovadores, entrar en nuevos mercados y generar ingresos adicionales.",
     caveat: "Son dos formas alternativas en que el candidato podría contribuir al crecimiento de GFT, según sus prioridades organizacionales. La comparación no sugiere que GFT deba crear ambas posiciones.",
   },
 };
@@ -115,7 +115,7 @@ export const compareModel: typeof enCompareModel = {
 export const compareFit: typeof enCompareFit = {
   title: "Mi encaje único para cualquiera de los dos roles",
   intro:
-    "Las mismas cuatro fortalezas sustentan ambas propuestas. Lo que cambia es cuáles lideran. Para Head of AI, lideran la profundidad en ingeniería y el liderazgo como CTO. Para Head of AI Ventures, lideran el emprendimiento y el desarrollo de negocio multisectorial.",
+    "Las mismas cuatro fortalezas sustentan ambas propuestas. Lo que cambia es cuáles lideran. Para CAIO, lideran la profundidad en ingeniería y el liderazgo como CTO. Para CAIVO, lideran el emprendimiento y el desarrollo de negocio multisectorial.",
   strengths: [
     { id: "engineering", title: "Ingeniería de IA práctica", icon: "Cpu", evidence: "Diseñó y construyó sistemas de LLM, RAG, agentes y voz con IA en producción en Bioanywhere y SDG Investors.", ai: 3, ventures: 2 },
     { id: "cto", title: "Liderazgo como CTO", icon: "Building2", evidence: "Lideró la estrategia tecnológica, equipos internacionales de ingeniería y la arquitectura empresarial en Legado; fundador-CTO en mindtalks.ai.", ai: 3, ventures: 2 },
@@ -144,5 +144,5 @@ export const compareClosing: typeof enCompareClosing = {
   headline: "Un candidato. Dos formas de crear valor.",
   text:
     "Sea cual sea la contribución que GFT priorice, el objetivo es el mismo: conectar la inteligencia artificial, el liderazgo tecnológico, la estrategia de negocio y el emprendimiento en resultados medibles para GFT y sus clientes.",
-  emailSubject: "Head of AI / AI Ventures — GFT Technologies",
+  emailSubject: "CAIO / CAIVO — GFT Technologies",
 };

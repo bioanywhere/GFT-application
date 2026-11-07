@@ -1,7 +1,7 @@
 export const hero = {
   eyebrow: "A Strategic Growth Proposal for GFT Technologies",
   headline: "Turning Artificial Intelligence Into New Business Opportunities.",
-  supporting: "Head of AI Ventures & Business Innovation",
+  supporting: "Chief AI Ventures Officer (CAIVO)",
   description:
     "An executive proposal to accelerate GFT's growth by identifying emerging market opportunities, building AI-powered business solutions, and transforming innovation into scalable revenue streams.",
   valueStatement:

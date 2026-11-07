@@ -20,7 +20,7 @@ export const aiHero = {
   eyebrow: "A Strategic Execution Proposal for GFT Technologies",
   headlineStart: "Making AI Work Across GFT.",
   headlineAccent: "In Production, At Scale.",
-  supporting: "Head of AI",
+  supporting: "CAIO — Chief AI Officer",
   description:
     "An executive proposal to strengthen how GFT and its clients adopt, engineer, govern, and scale artificial intelligence: turning strategy into production systems, production systems into measurable operational impact.",
   valueStatement:
@@ -42,15 +42,15 @@ export const aiContext = {
   intro:
     "GFT has made AI the centre of its strategy, with a proprietary agentic platform, banking-specific agents, and recognized delivery depth in financial services. The opportunity now is operational: making sure every region, every delivery team, and every client engagement can adopt that capability consistently, securely, and at production quality.",
   coreMessage:
-    "The value of AI is realized in production, not in demos. A regional Head of AI exists to make adoption systematic: the right use cases, the right architecture, the right standards, and measurable results across GFT's operations and its clients' businesses.",
+    "The value of AI is realized in production, not in demos. A regional CAIO exists to make adoption systematic: the right use cases, the right architecture, the right standards, and measurable results across GFT's operations and its clients' businesses.",
   pillars: [
     { id: "adopt", title: "Adopt", icon: "Users" as IconName, text: "Accelerate AI adoption across GFT's services, internal operations, and client organizations with clear priorities and programs." },
     { id: "engineer", title: "Engineer", icon: "Cpu" as IconName, text: "Build enterprise-grade AI solutions on GFT's platforms and standards: scalable, secure, observable, and production-ready." },
     { id: "govern", title: "Govern & Scale", icon: "ShieldCheck" as IconName, text: "Establish responsible AI, evaluation, and operating practices that let successful solutions scale with confidence." },
   ],
   contrast: {
-    title: "How this differs from the AI Ventures proposal",
-    text: "Head of AI Ventures & Business Innovation is about growth: finding and commercializing new AI businesses. Head of AI is about execution: making AI work effectively across what GFT already delivers. Both draw on the same experience; they answer different organizational priorities.",
+    title: "How this differs from the CAIVO proposal",
+    text: "Chief AI Ventures Officer (CAIVO) is about growth: finding and commercializing new AI businesses. CAIO is about execution: making AI work effectively across what GFT already delivers. Both draw on the same experience; they answer different organizational priorities.",
   },
   complement: {
     title: "Complementing GFT's global AI organization",
@@ -538,7 +538,7 @@ export const aiStandards = {
 export const aiImpact = {
   headline: "Execution Is Measured. Impact Is Reported.",
   intro:
-    "The Head of AI function would report on adoption, productivity, delivery performance, cost efficiency, and return on investment every quarter, using a scorecard agreed with regional and global leadership.",
+    "The CAIO function would report on adoption, productivity, delivery performance, cost efficiency, and return on investment every quarter, using a scorecard agreed with regional and global leadership.",
   kpis: [
     { id: "adoption", label: "AI adoption across business units and clients", icon: "Users" as IconName },
     { id: "production", label: "AI solutions successfully deployed to production", icon: "Rocket" as IconName },
@@ -623,7 +623,7 @@ export const aiOperatingModel = {
   headline: "A Regional AI Function That Strengthens the Global One.",
   intro:
     "The role would operate inside GFT's existing AI organization, not beside it: aligned with global AI leadership and platform teams, embedded with regional delivery, and accountable to regional business leadership for adoption and impact.",
-  role: "Head of AI (Regional)",
+  role: "CAIO — Chief AI Officer (Regional)",
   mission:
     "Ensure that AI is strategically adopted, technically executed, effectively governed, and successfully scaled across GFT's regional operations and client engagements, in coordination with GFT's global AI organization.",
   responsibilities: [
@@ -656,7 +656,7 @@ export const aiClosing = {
   supporting:
     "GFT has the strategy, the platforms, and the engineering talent. What I offer is the execution leadership to turn them into adopted, governed, production-grade AI across the region: measured in productivity, reliability, cost, and customer value.",
   personal:
-    "Rohan, I would welcome a conversation about how a regional Head of AI function could accelerate adoption and delivery quality for GFT and its clients in the Andean region and beyond.",
-  primaryCta: "Let's Discuss the Head of AI Role",
-  emailSubject: "Head of AI — GFT Technologies",
+    "Rohan, I would welcome a conversation about how a regional CAIO function could accelerate adoption and delivery quality for GFT and its clients in the Andean region and beyond.",
+  primaryCta: "Let's Discuss the CAIO Role",
+  emailSubject: "CAIO (Chief AI Officer) — GFT Technologies",
 };

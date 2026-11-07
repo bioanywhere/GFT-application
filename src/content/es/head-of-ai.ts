@@ -26,7 +26,7 @@ export const aiHero: typeof enAiHero = {
   eyebrow: "Una propuesta estratégica de ejecución para GFT Technologies",
   headlineStart: "Hacer que la IA funcione en toda GFT.",
   headlineAccent: "En producción, a escala.",
-  supporting: "Head of AI",
+  supporting: "CAIO — Chief AI Officer",
   description:
     "Una propuesta ejecutiva para fortalecer la forma en que GFT y sus clientes adoptan, construyen, gobiernan y escalan la inteligencia artificial: convertir la estrategia en sistemas en producción, y los sistemas en producción en impacto operativo medible.",
   valueStatement:
@@ -48,15 +48,15 @@ export const aiContext: typeof enAiContext = {
   intro:
     "GFT ha puesto la IA en el centro de su estrategia, con una plataforma agéntica propia, agentes especializados en banca y una profundidad de entrega reconocida en servicios financieros. La oportunidad ahora es operativa: asegurar que cada región, cada equipo de entrega y cada proyecto con clientes pueda adoptar esa capacidad de forma consistente, segura y con calidad de producción.",
   coreMessage:
-    "El valor de la IA se materializa en producción, no en demos. Un Head of AI regional existe para hacer sistemática la adopción: los casos de uso correctos, la arquitectura correcta, los estándares correctos y resultados medibles en las operaciones de GFT y en los negocios de sus clientes.",
+    "El valor de la IA se materializa en producción, no en demos. Un CAIO regional existe para hacer sistemática la adopción: los casos de uso correctos, la arquitectura correcta, los estándares correctos y resultados medibles en las operaciones de GFT y en los negocios de sus clientes.",
   pillars: [
     { id: "adopt", title: "Adoptar", icon: "Users", text: "Acelerar la adopción de IA en los servicios de GFT, sus operaciones internas y las organizaciones de sus clientes, con prioridades y programas claros." },
     { id: "engineer", title: "Construir", icon: "Cpu", text: "Construir soluciones de IA de nivel empresarial sobre las plataformas y los estándares de GFT: escalables, seguras, observables y listas para producción." },
     { id: "govern", title: "Gobernar y escalar", icon: "ShieldCheck", text: "Establecer prácticas de IA responsable, evaluación y operación que permitan escalar con confianza las soluciones exitosas." },
   ],
   contrast: {
-    title: "En qué se diferencia de la propuesta de AI Ventures",
-    text: "Head of AI Ventures & Business Innovation trata de crecimiento: encontrar y comercializar nuevos negocios con IA. Head of AI trata de ejecución: hacer que la IA funcione con eficacia en lo que GFT ya entrega. Ambas se apoyan en la misma experiencia; responden a prioridades organizacionales distintas.",
+    title: "En qué se diferencia de la propuesta CAIVO",
+    text: "Chief AI Ventures Officer (CAIVO) trata de crecimiento: encontrar y comercializar nuevos negocios con IA. CAIO trata de ejecución: hacer que la IA funcione con eficacia en lo que GFT ya entrega. Ambas se apoyan en la misma experiencia; responden a prioridades organizacionales distintas.",
   },
   complement: {
     title: "Complementar la organización global de IA de GFT",
@@ -357,7 +357,7 @@ export const aiStandards: typeof enAiStandards = {
 export const aiImpact: typeof enAiImpact = {
   headline: "La ejecución se mide. El impacto se reporta.",
   intro:
-    "La función de Head of AI reportaría cada trimestre sobre adopción, productividad, desempeño de entrega, eficiencia de costos y retorno de la inversión, con un cuadro de mando acordado con el liderazgo regional y global.",
+    "La función de CAIO reportaría cada trimestre sobre adopción, productividad, desempeño de entrega, eficiencia de costos y retorno de la inversión, con un cuadro de mando acordado con el liderazgo regional y global.",
   kpis: [
     { id: "adoption", label: "Adopción de IA en unidades de negocio y clientes", icon: "Users" },
     { id: "production", label: "Soluciones de IA desplegadas con éxito en producción", icon: "Rocket" },
@@ -406,7 +406,7 @@ export const aiOperatingModel: typeof enAiOperatingModel = {
   headline: "Una función regional de IA que fortalece a la global.",
   intro:
     "El rol operaría dentro de la organización de IA existente de GFT, no al margen de ella: alineado con el liderazgo global de IA y los equipos de plataforma, integrado en la entrega regional y responsable ante el liderazgo de negocio regional por la adopción y el impacto.",
-  role: "Head of AI (regional)",
+  role: "CAIO — Chief AI Officer (regional)",
   mission:
     "Asegurar que la IA se adopte estratégicamente, se ejecute técnicamente, se gobierne con eficacia y se escale con éxito en las operaciones regionales y los proyectos con clientes de GFT, en coordinación con la organización global de IA de GFT.",
   responsibilities: ["Estrategia y hoja de ruta de IA", "Liderazgo de ingeniería de IA", "Adopción empresarial de IA", "Desarrollo de productos y plataformas de IA", "Gobernanza e IA responsable", "Estándares de evaluación y observabilidad", "Alineación con el negocio y KPI", "Diseño de soluciones para clientes con ventas", "Desarrollo y habilitación del talento", "Coordinación con el liderazgo global de IA"],
@@ -428,7 +428,7 @@ export const aiClosing: typeof enAiClosing = {
   supporting:
     "GFT tiene la estrategia, las plataformas y el talento de ingeniería. Lo que ofrezco es el liderazgo de ejecución para convertirlos en IA adoptada, gobernada y de nivel de producción en toda la región: medida en productividad, confiabilidad, costo y valor para el cliente.",
   personal:
-    "Rohan, me encantaría conversar sobre cómo una función regional de Head of AI podría acelerar la adopción y la calidad de entrega para GFT y sus clientes en la Región Andina y más allá.",
-  primaryCta: "Conversemos sobre el rol de Head of AI",
-  emailSubject: "Head of AI — GFT Technologies",
+    "Rohan, me encantaría conversar sobre cómo una función regional de CAIO podría acelerar la adopción y la calidad de entrega para GFT y sus clientes en la Región Andina y más allá.",
+  primaryCta: "Conversemos sobre el rol de CAIO",
+  emailSubject: "CAIO (Chief AI Officer) — GFT Technologies",
 };

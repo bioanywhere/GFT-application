@@ -14,8 +14,8 @@ import type { ProposalTab } from "../proposals";
 
 export const site: SiteContent = {
   ...enSite,
-  name: "Propuesta AI Ventures · Andrés García Montoya",
-  shortName: "Propuesta AI Ventures",
+  name: "Propuestas ejecutivas · Andrés García Montoya",
+  shortName: "Propuestas ejecutivas",
   description:
     "Propuesta ejecutiva independiente preparada para GFT Technologies: convertir la inteligencia artificial en nuevas oportunidades de negocio, y las oportunidades en ingresos.",
   tagline: "De la inteligencia artificial a las oportunidades de negocio. De las oportunidades a los ingresos.",
@@ -32,9 +32,9 @@ export const site: SiteContent = {
     availability: "Disponible de inmediato",
     openTo: "Abierto a oportunidades en todo el mundo",
   },
-  emailSubject: "AI Ventures & Business Innovation — GFT Technologies",
+  emailSubject: "Chief AI Ventures Officer (CAIVO) — GFT Technologies",
   emailBody:
-    "Hola Andrés:\n\nRevisé tu propuesta de AI Ventures & Business Innovation para GFT Technologies y me gustaría agendar una conversación.\n\n",
+    "Hola Andrés:\n\nRevisé tu propuesta de Chief AI Ventures Officer (CAIVO) para GFT Technologies y me gustaría agendar una conversación.\n\n",
 };
 
 const navLabels: Record<(typeof enNavigation)[number]["id"], string> = {
@@ -55,7 +55,7 @@ export const navigation = enNavigation.map((n) => ({ id: n.id, label: navLabels[
 export const hero: typeof enHero = {
   eyebrow: "Una propuesta estratégica de crecimiento para GFT Technologies",
   headline: "Convertir la inteligencia artificial en nuevas oportunidades de negocio.",
-  supporting: "Head of AI Ventures & Business Innovation",
+  supporting: "Chief AI Ventures Officer (CAIVO)",
   description:
     "Una propuesta ejecutiva para acelerar el crecimiento de GFT identificando oportunidades de mercado emergentes, construyendo soluciones de negocio impulsadas por IA y transformando la innovación en flujos de ingresos escalables.",
   valueStatement:
@@ -345,7 +345,7 @@ export const fit: FitData = {
   headline: "Complementar el liderazgo de IA de GFT. Expandir su potencial de negocio.",
   intro:
     "La función propuesta no es dueña de plataformas, ingeniería ni entrega. Es dueña del pipeline de nuevos negocios con IA y trabaja a través de los equipos que ya hacen fuerte a GFT.",
-  role: "Head of AI Ventures & Business Innovation",
+  role: "Chief AI Ventures Officer (CAIVO)",
   mission:
     "Identificar y transformar oportunidades emergentes de IA en productos, servicios y negocios comercialmente viables que fortalezcan la posición de mercado de GFT y generen un crecimiento sostenible de ingresos.",
   responsibilities: ["Descubrimiento de oportunidades de IA", "Estrategia de negocio", "Desarrollo de nuevos negocios", "Comercialización de productos de IA", "Validación de casos de negocio", "Estrategia de salida al mercado", "Alianzas estratégicas", "Expansión sectorial", "Colaboración multifuncional", "Desarrollo de oportunidades de ingresos"],
@@ -392,7 +392,7 @@ export const closing: typeof enClosing = {
 };
 
 export const proposals: ProposalTab[] = [
-  { id: "ventures", path: "/", label: "Head of AI Ventures", short: "AI Ventures", title: "Head of AI Ventures & Business Innovation", tone: "growth" },
-  { id: "ai", path: "/head-of-ai", label: "Head of AI", short: "Head of AI", title: "Head of AI", tone: "execution" },
+  { id: "ventures", path: "/", label: "Chief AI Ventures Officer", short: "CAIVO", title: "Chief AI Ventures Officer (CAIVO)", tone: "growth" },
+  { id: "ai", path: "/head-of-ai", label: "Chief AI Officer", short: "CAIO", title: "CAIO — Chief AI Officer", tone: "execution" },
   { id: "compare", path: "/compare", label: "Comparar ambas", short: "Comparar", title: "Comparación estratégica", tone: "neutral" },
 ];

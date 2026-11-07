@@ -14,7 +14,7 @@ export const fit: FitData = {
   headline: "Complementing GFT's AI Leadership. Expanding Its Business Potential.",
   intro:
     "The proposed function does not own platforms, engineering, or delivery. It owns the pipeline of new AI businesses and works through the teams that already make GFT strong.",
-  role: "Head of AI Ventures & Business Innovation",
+  role: "Chief AI Ventures Officer (CAIVO)",
   mission:
     "Identify and transform emerging AI opportunities into commercially viable products, services, and business ventures that strengthen GFT's market position and create sustainable revenue growth.",
   responsibilities: [

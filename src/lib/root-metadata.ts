@@ -9,7 +9,7 @@ export function rootMetadata(locale: Locale): Metadata {
     metadataBase: new URL(site.url),
     title: { default: m.title, template: "%s" },
     description: m.description,
-    keywords: ["AI Ventures", "Business Innovation", "GFT Technologies", "Head of AI", "Andrés García Montoya", "Agentic AI", "Executive proposal"],
+    keywords: ["AI Ventures", "Business Innovation", "GFT Technologies", "Chief AI Officer", "CAIO", "Chief AI Ventures Officer", "CAIVO", "Andrés García Montoya", "Agentic AI", "Executive proposal"],
     authors: [{ name: site.candidate.name, url: site.candidate.linkedin }],
     creator: site.candidate.name,
     openGraph: { type: "website", url: site.url, siteName: site.shortName, title: m.title, description: m.description, locale: locale === "es" ? "es_ES" : "en_US" },

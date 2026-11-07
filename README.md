@@ -6,8 +6,8 @@ contributions and a comparison between them:
 
 | Tab | English | Spanish | Orientation |
 | --- | --- | --- | --- |
-| Head of AI Ventures & Business Innovation | `/` | `/es` | Growth: identify, build, and commercialize new AI businesses |
-| Head of AI | `/head-of-ai` | `/es/head-of-ai` | Execution: AI strategy, engineering, adoption, governance, scale |
+| Chief AI Ventures Officer (CAIVO) | `/` | `/es` | Growth: identify, build, and commercialize new AI businesses |
+| CAIO — Chief AI Officer | `/head-of-ai` | `/es/head-of-ai` | Execution: AI strategy, engineering, adoption, governance, scale |
 | Compare Both | `/compare` | `/es/compare` | Side-by-side comparison, focus visualization, impact explorer, priority guide |
 
 Every page is available in English and Spanish. The EN / ES toggle in the navigation bar switches the
@@ -60,10 +60,10 @@ so they never contain hard-coded text.
 | File | What it controls |
 | --- | --- |
 | `proposals.ts` | The three top-level tabs (labels, routes) |
-| `head-of-ai.ts` | Everything on the Head of AI proposal: hero, mandate, delivery model, 16 use cases, profile, standards, impact, 90 days, operating model |
+| `head-of-ai.ts` | Everything on the CAIO proposal: hero, mandate, delivery model, 16 use cases, profile, standards, impact, 90 days, operating model |
 | `compare.ts` | Everything on the comparison page: dimensions table, qualitative focus levels, industry impact, complementary model, fit, priority guide |
 
-Head of AI Ventures proposal content:
+CAIVO proposal content:
 
 | File | What it controls |
 | --- | --- |
@@ -93,7 +93,7 @@ Head of AI Ventures proposal content:
 - **Presentation Mode**: fullscreen slides, arrow-key navigation, Esc to exit
 - **Executive Summary** at `/executive-summary` and `/head-of-ai/executive-summary`: one-page, print-friendly, exportable to PDF
 - Proposal tab bar on every page; each proposal has its own section navigation, progress indicator and presentation mode
-- Head of AI uses an execution palette (blue → cyan → emerald) via the `theme-ai` class; AI Ventures keeps blue → violet → magenta
+- CAIO uses an execution palette (blue → cyan → emerald) via the `theme-ai` class; AI Ventures keeps blue → violet → magenta
 - Interactive AI Business Opportunity Engine (clickable stages)
 - AI Opportunity Explorer with industry selector, filters by business value and commercial model, and detail dialogs
 - Editable, clearly labelled hypothetical pipeline scenario (no financial projections)

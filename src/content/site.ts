@@ -17,8 +17,8 @@ export interface SiteContent {
 }
 
 export const site: SiteContent = {
-  name: "AI Ventures Proposal · Andrés García Montoya",
-  shortName: "AI Ventures Proposal",
+  name: "Executive Proposals · Andrés García Montoya",
+  shortName: "Executive Proposals",
   url: "https://gft-ai-ventures.vercel.app",
   description:
     "An independent executive proposal prepared for GFT Technologies: turning artificial intelligence into new business opportunities, and opportunities into revenue.",
@@ -45,15 +45,11 @@ export const site: SiteContent = {
     availability: "Available Immediately",
     openTo: "Open to Worldwide Opportunities",
   },
-  positions: [
-    "Head of AI",
-    "Head of AI Ventures",
-    "Head of AI Ventures & Business Innovation",
-  ],
-  primaryPosition: "Head of AI Ventures & Business Innovation",
-  emailSubject: "AI Ventures & Business Innovation — GFT Technologies",
+  positions: ["CAIO — Chief AI Officer", "Chief AI Ventures Officer (CAIVO)"],
+  primaryPosition: "Chief AI Ventures Officer (CAIVO)",
+  emailSubject: "Chief AI Ventures Officer (CAIVO) — GFT Technologies",
   emailBody:
-    "Hi Andrés,\n\nI reviewed your AI Ventures & Business Innovation proposal for GFT Technologies and would like to schedule a conversation.\n\n",
+    "Hi Andrés,\n\nI reviewed your Chief AI Ventures Officer (CAIVO) proposal for GFT Technologies and would like to schedule a conversation.\n\n",
 };
 
 export function mailtoLink(subject: string = site.emailSubject, body: string = site.emailBody) {

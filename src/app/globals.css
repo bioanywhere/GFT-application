@@ -80,7 +80,7 @@
   --animate-spin-slow: spin 40s linear infinite;
 }
 
-/* Execution-oriented palette for the Head of AI proposal: blue → cyan → emerald */
+/* Execution-oriented palette for the CAIO proposal: blue → cyan → emerald */
 .theme-ai {
   --accent-violet: var(--accent-cyan);
   --accent-magenta: var(--accent-emerald);
