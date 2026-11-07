@@ -3,19 +3,22 @@
 import { useMemo, useState } from "react";
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { RotateCcw } from "lucide-react";
-import { impact } from "@/content";
+import { useContent } from "@/components/layout/locale-provider";
+import type { Dictionary } from "@/content/dictionary";
 import { Button } from "@/components/ui/button";
 
-type Params = typeof impact.scenario.defaults;
+type Params = Dictionary["impact"]["scenario"]["defaults"];
 
-const sliders: { key: keyof Params; label: string; min: number; max: number; step: number; unit: string }[] = [
-  { key: "opportunitiesPerQuarter", label: "Opportunities discovered per quarter", min: 4, max: 30, step: 1, unit: "" },
-  { key: "validationRate", label: "Validated with customers", min: 10, max: 80, step: 5, unit: "%" },
-  { key: "pilotRate", label: "Validated cases that become pilots", min: 10, max: 100, step: 5, unit: "%" },
-  { key: "commercializationRate", label: "Pilots that commercialize", min: 10, max: 100, step: 5, unit: "%" },
+const sliderDefs: { key: keyof Params; min: number; max: number; step: number; unit: string }[] = [
+  { key: "opportunitiesPerQuarter", min: 4, max: 30, step: 1, unit: "" },
+  { key: "validationRate", min: 10, max: 80, step: 5, unit: "%" },
+  { key: "pilotRate", min: 10, max: 100, step: 5, unit: "%" },
+  { key: "commercializationRate", min: 10, max: 100, step: 5, unit: "%" },
 ];
 
 export function PipelineScenario() {
+  const { impact, ui } = useContent();
+  const sliders = sliderDefs.map((s) => ({ ...s, label: ui.impact.sliders[s.key] }));
   const [params, setParams] = useState<Params>(impact.scenario.defaults);
 
   const data = useMemo(() => {
@@ -37,7 +40,7 @@ export function PipelineScenario() {
       { rows: [], acc: [0, 0, 0, 0] },
     );
     return cumulative.rows;
-  }, [params]);
+  }, [params, impact.scenario.quarters]);
 
   const totals = data[data.length - 1];
 
@@ -46,9 +49,9 @@ export function PipelineScenario() {
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <p className="eyebrow">{impact.scenario.title}</p>
-          <p className="mt-1 text-sm text-muted">Cumulative funnel over four quarters. Adjust the assumptions to explore the shape of the pipeline.</p>
+          <p className="mt-1 text-sm text-muted">{ui.impact.scenarioNote}</p>
         </div>
-        <span className="rounded-full border border-accent-amber/50 bg-accent-amber/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-accent-amber">Hypothetical · editable</span>
+        <span className="rounded-full border border-accent-amber/50 bg-accent-amber/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-accent-amber">{ui.common.hypotheticalEditable}</span>
       </div>
 
       <div className="mt-6 grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
@@ -71,10 +74,10 @@ export function PipelineScenario() {
               />
             </div>
           ))}
-          <Button variant="ghost" size="sm" onClick={() => setParams(impact.scenario.defaults)}><RotateCcw /> Reset assumptions</Button>
+          <Button variant="ghost" size="sm" onClick={() => setParams(impact.scenario.defaults)}><RotateCcw /> {ui.impact.resetAssumptions}</Button>
         </div>
         <div>
-          <div className="h-[260px] w-full" role="img" aria-label="Area chart of cumulative opportunities discovered, validated, piloted and commercialized across four quarters under the current assumptions">
+          <div className="h-[260px] w-full" role="img" aria-label={ui.impact.chartAria}>
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={data} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                 <defs>
@@ -89,19 +92,19 @@ export function PipelineScenario() {
                 <XAxis dataKey="quarter" tick={{ fill: "var(--muted)", fontSize: 11 }} axisLine={false} tickLine={false} />
                 <YAxis tick={{ fill: "var(--muted)", fontSize: 11 }} axisLine={false} tickLine={false} allowDecimals={false} />
                 <Tooltip contentStyle={{ background: "var(--card-solid)", border: "1px solid var(--border)", borderRadius: 12, fontSize: 12, color: "var(--foreground)" }} />
-                <Area type="monotone" dataKey="Discovered" stroke="var(--accent-blue)" fill="url(#ps-d)" strokeWidth={2} />
-                <Area type="monotone" dataKey="Validated" stroke="var(--accent-violet)" fill="url(#ps-v)" strokeWidth={2} />
-                <Area type="monotone" dataKey="Pilots" stroke="var(--accent-magenta)" fill="url(#ps-p)" strokeWidth={2} />
-                <Area type="monotone" dataKey="Commercialized" stroke="var(--accent-emerald)" fill="url(#ps-c)" strokeWidth={2} />
+                <Area type="monotone" dataKey="Discovered" name={ui.impact.series.discovered} stroke="var(--accent-blue)" fill="url(#ps-d)" strokeWidth={2} />
+                <Area type="monotone" dataKey="Validated" name={ui.impact.series.validated} stroke="var(--accent-violet)" fill="url(#ps-v)" strokeWidth={2} />
+                <Area type="monotone" dataKey="Pilots" name={ui.impact.series.pilots} stroke="var(--accent-magenta)" fill="url(#ps-p)" strokeWidth={2} />
+                <Area type="monotone" dataKey="Commercialized" name={ui.impact.series.commercialized} stroke="var(--accent-emerald)" fill="url(#ps-c)" strokeWidth={2} />
               </AreaChart>
             </ResponsiveContainer>
           </div>
           <dl className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
             {[
-              ["Discovered", totals.Discovered, "var(--accent-blue)"],
-              ["Validated", totals.Validated, "var(--accent-violet)"],
-              ["Pilots", totals.Pilots, "var(--accent-magenta)"],
-              ["Commercialized", totals.Commercialized, "var(--accent-emerald)"],
+              [ui.impact.series.discovered, totals.Discovered, "var(--accent-blue)"],
+              [ui.impact.series.validated, totals.Validated, "var(--accent-violet)"],
+              [ui.impact.series.pilots, totals.Pilots, "var(--accent-magenta)"],
+              [ui.impact.series.commercialized, totals.Commercialized, "var(--accent-emerald)"],
             ].map(([label, val, color]) => (
               <div key={label as string} className="rounded-xl border border-border p-3">
                 <dt className="flex items-center gap-1.5 text-[11px] text-muted"><span className="size-2 rounded-full" style={{ background: color as string }} /> {label}</dt>

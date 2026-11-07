@@ -1,16 +1,17 @@
 "use client";
 
 import { PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart, ResponsiveContainer, Tooltip } from "recharts";
-import { site } from "@/content";
-import { aiProfile } from "@/content/head-of-ai";
+import { useContent } from "@/components/layout/locale-provider";
 import { Section, SectionHeading } from "@/components/layout/section";
 import { Reveal, Stagger, StaggerItem } from "@/components/layout/reveal";
 import { Icon } from "@/components/ui/icon";
 
 export function AiWhyAndresSection() {
+  const { site, ai, ui } = useContent();
+  const aiProfile = ai.profile;
   return (
     <Section id="ai-why-andres" tone="elevated">
-      <Reveal><SectionHeading eyebrow="06 · Why Andrés" title={aiProfile.headline} intro={aiProfile.intro} /></Reveal>
+      <Reveal><SectionHeading eyebrow={ui.ai.whyAndresEyebrow} title={aiProfile.headline} intro={aiProfile.intro} /></Reveal>
 
       <Stagger className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {aiProfile.pillars.map((p, i) => (
@@ -27,7 +28,7 @@ export function AiWhyAndresSection() {
 
       <div className="mt-12 grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
         <div>
-          <Reveal><p className="eyebrow mb-4">Evidence from the record</p></Reveal>
+          <Reveal><p className="eyebrow mb-4">{ui.ai.evidence}</p></Reveal>
           <ol className="relative grid gap-3 border-l border-border pl-6">
             {aiProfile.evidence.map((e, i) => (
               <Reveal key={e.org} as="li" delay={i * 0.05} className="relative rounded-2xl card p-5">
@@ -44,8 +45,8 @@ export function AiWhyAndresSection() {
         </div>
         <div className="flex flex-col gap-4">
           <Reveal className="rounded-3xl card p-6">
-            <p className="eyebrow">Capability profile</p>
-            <div className="h-[300px] w-full" role="img" aria-label="Radar chart of capability emphasis across AI engineering, technology leadership, enterprise architecture, delivery and operations, business alignment and governance">
+            <p className="eyebrow">{ui.ai.capabilityProfile}</p>
+            <div className="h-[300px] w-full" role="img" aria-label={ui.ai.radarAria}>
               <ResponsiveContainer width="100%" height="100%">
                 <RadarChart data={aiProfile.radar} outerRadius="70%" margin={{ top: 10, right: 30, bottom: 10, left: 30 }}>
                   <defs>
@@ -57,7 +58,7 @@ export function AiWhyAndresSection() {
                   <PolarGrid stroke="var(--border-strong)" />
                   <PolarAngleAxis dataKey="axis" tick={{ fill: "var(--muted-strong)", fontSize: 11 }} />
                   <PolarRadiusAxis angle={90} domain={[0, 100]} tick={false} axisLine={false} />
-                  <Tooltip cursor={false} contentStyle={{ background: "var(--card-solid)", border: "1px solid var(--border)", borderRadius: 12, fontSize: 12, color: "var(--foreground)" }} formatter={(v) => [`${v} / 100`, "Emphasis"]} />
+                  <Tooltip cursor={false} contentStyle={{ background: "var(--card-solid)", border: "1px solid var(--border)", borderRadius: 12, fontSize: 12, color: "var(--foreground)" }} formatter={(v) => [`${v} / 100`, ui.whyAndres.emphasis]} />
                   <Radar dataKey="value" stroke="var(--accent-cyan)" strokeWidth={2} fill="url(#ai-radar-fill)" />
                 </RadarChart>
               </ResponsiveContainer>
@@ -74,7 +75,7 @@ export function AiWhyAndresSection() {
                 </div>
               ))}
             </div>
-            <p className="mt-4 text-xs text-muted">Full professional history: <a href={site.candidate.cvPath} download={site.candidate.cvFileName} className="underline-offset-4 hover:text-foreground hover:underline">download CV</a>.</p>
+            <p className="mt-4 text-xs text-muted">{ui.ai.fullHistory} <a href={site.candidate.cvPath} download={site.candidate.cvFileName} className="underline-offset-4 hover:text-foreground hover:underline">{ui.ai.downloadCvLink}</a>.</p>
           </Reveal>
         </div>
       </div>

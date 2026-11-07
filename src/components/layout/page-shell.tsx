@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { sections as defaultSections } from "@/components/sections/registry";
-import { navigation as defaultNavigation } from "@/content";
 import type { NavItem, SectionEntry } from "@/components/layout/types";
+import type { Locale } from "@/content/locale";
+import { LocaleProvider } from "@/components/layout/locale-provider";
 import { PresentationProvider, usePresentation } from "@/components/interactive/presentation-context";
 import { PresentationMode } from "@/components/interactive/presentation-mode";
 import { Navbar } from "./navbar";
@@ -11,15 +11,16 @@ import { SectionDots } from "./section-dots";
 import { Footer } from "./footer";
 import { scrollToSection } from "@/lib/utils";
 
-interface ShellProps {
-  sections?: readonly SectionEntry[];
-  navigation?: readonly NavItem[];
-  brandSub?: string;
+export interface ShellProps {
+  locale: Locale;
+  sections: readonly SectionEntry[];
+  navigation: readonly NavItem[];
+  brandSub: string;
   summaryHref?: string | null;
   className?: string;
 }
 
-function Body({ sections = defaultSections, navigation = defaultNavigation, brandSub, summaryHref, className }: ShellProps) {
+function Body({ sections, navigation, brandSub, summaryHref, className }: Omit<ShellProps, "locale">) {
   const { active, index } = usePresentation();
   const wasActive = useRef(false);
 
@@ -34,7 +35,7 @@ function Body({ sections = defaultSections, navigation = defaultNavigation, bran
   return (
     <div className={className}>
       {active ? (
-        <PresentationMode sections={sections} />
+        <PresentationMode sections={sections} navigation={navigation} />
       ) : (
         <>
           <Navbar navigation={navigation} brandSub={brandSub} summaryHref={summaryHref} homeId={sections[0].id} />
@@ -51,11 +52,12 @@ function Body({ sections = defaultSections, navigation = defaultNavigation, bran
   );
 }
 
-export function PageShell(props: ShellProps) {
-  const total = (props.sections ?? defaultSections).length;
+export function PageShell({ locale, ...props }: ShellProps) {
   return (
-    <PresentationProvider total={total}>
-      <Body {...props} />
-    </PresentationProvider>
+    <LocaleProvider locale={locale}>
+      <PresentationProvider total={props.sections.length}>
+        <Body {...props} />
+      </PresentationProvider>
+    </LocaleProvider>
   );
 }

@@ -2,23 +2,25 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import { ArrowRight, RefreshCw } from "lucide-react";
-import { compareModel, compareRoles } from "@/content/compare";
+import { useContent } from "@/components/layout/locale-provider";
 import { Section, SectionHeading } from "@/components/layout/section";
 import { Reveal, Stagger, StaggerItem } from "@/components/layout/reveal";
 import { RoleChip } from "./role-chip";
 
 export function CompareModelSection() {
+  const { compare, ui } = useContent();
+  const { model: compareModel, roles: compareRoles } = compare;
   const reduce = useReducedMotion();
   const n = compareModel.loop.length;
   return (
     <Section id="cmp-model">
-      <Reveal><SectionHeading eyebrow={`05 · ${compareModel.title}`} title="How the Two Roles Would Reinforce Each Other." intro={compareModel.intro} /></Reveal>
+      <Reveal><SectionHeading eyebrow={ui.cmp.modelEyebrow} title={ui.cmp.modelTitle} intro={compareModel.intro} /></Reveal>
 
       <Reveal delay={0.1} className="mt-12 rounded-3xl card p-6 sm:p-8">
         <ol className="grid gap-3 md:grid-cols-6">
           {compareModel.loop.map((step, i) => {
             const color = step.owner === "ai" ? compareRoles.ai.color : step.owner === "ventures" ? compareRoles.ventures.color2 : "var(--foreground)";
-            const label = step.owner === "ai" ? "Head of AI" : step.owner === "ventures" ? "Head of AI Ventures" : "Both";
+            const label = step.owner === "ai" ? compareRoles.ai.short : step.owner === "ventures" ? compareRoles.ventures.short : ui.cmp.both;
             return (
               <motion.li key={step.id} initial={reduce ? false : { opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="relative rounded-2xl border border-border bg-background-elevated/70 p-4">
                 <span className="flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.12em]" style={{ color }}>
@@ -34,7 +36,7 @@ export function CompareModelSection() {
           <svg viewBox="0 0 100 10" preserveAspectRatio="none" className="h-full w-full">
             <motion.path d="M 92 0 C 92 9, 8 9, 8 0" fill="none" stroke="var(--border-strong)" strokeWidth="0.3" strokeDasharray="1 1" initial={reduce ? undefined : { pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 1.4, delay: 0.6 }} />
           </svg>
-          <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-border bg-background px-2 py-0.5 text-[10px] text-muted">market demand feeds the roadmap</span>
+          <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-border bg-background px-2 py-0.5 text-[10px] text-muted">{ui.cmp.feedback}</span>
         </div>
       </Reveal>
 

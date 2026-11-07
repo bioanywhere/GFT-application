@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
-import { availability } from "@/content";
+import { useContent } from "@/components/layout/locale-provider";
 
 // Stylised dot-matrix world: coarse continent silhouettes as a point grid.
 const continents: [number, number, number, number][] = [
@@ -27,10 +27,11 @@ for (let y = 10; y <= 80; y += 2.2) {
 }
 
 export function WorldMap() {
+  const { availability, ui } = useContent();
   const reduce = useReducedMotion();
   const home = availability.home;
   return (
-    <div className="relative aspect-[2/1] w-full" role="img" aria-label="Stylised world map highlighting collaboration readiness across Latin America, North America, Europe and Asia Pacific from a base in Colombia">
+    <div className="relative aspect-[2/1] w-full" role="img" aria-label={ui.availability.mapAria}>
       <svg viewBox="0 0 100 50" className="h-full w-full" preserveAspectRatio="xMidYMid meet">
         <defs>
           <linearGradient id="wm-arc" x1="0" x2="1">
@@ -76,7 +77,7 @@ export function WorldMap() {
           transition={{ duration: 2.4, repeat: Infinity }}
         />
         <circle cx={home.x} cy={home.y / 2} r="1.2" fill="var(--accent-blue)" stroke="var(--background-elevated)" strokeWidth="0.3" />
-        <text x={home.x} y={home.y / 2 + 4} textAnchor="middle" fontSize="2" fontWeight="700" fill="var(--accent-blue)">Colombia</text>
+        <text x={home.x} y={home.y / 2 + 4} textAnchor="middle" fontSize="2" fontWeight="700" fill="var(--accent-blue)">{ui.availability.home}</text>
       </svg>
     </div>
   );

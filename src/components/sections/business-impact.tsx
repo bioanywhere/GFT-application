@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "motion/react";
-import { impact, allOpportunities } from "@/content";
+import { useContent } from "@/components/layout/locale-provider";
 import { cn } from "@/lib/utils";
 import { Section, SectionHeading } from "@/components/layout/section";
 import { Reveal, Stagger, StaggerItem } from "@/components/layout/reveal";
@@ -10,22 +10,23 @@ import { Icon } from "@/components/ui/icon";
 import { PipelineScenario } from "@/components/visuals/pipeline-scenario";
 
 export function BusinessImpactSection() {
+  const { impact, industries, ui } = useContent();
+  const allOpportunities = industries.flatMap((i) => i.opportunities);
   const [activeValue, setActiveValue] = useState(impact.valueFramework[0].id);
   const active = impact.valueFramework.find((v) => v.id === activeValue)!;
-  const driverName = active.title as (typeof allOpportunities)[number]["valueDrivers"][number];
-  const matching = allOpportunities.filter((o) => o.valueDrivers.includes(driverName));
+  const matching = allOpportunities.filter((o) => o.valueDrivers.includes(active.driver));
 
   return (
     <Section id="impact">
       <Reveal>
-        <SectionHeading eyebrow="07 · AI Ventures: Business Impact" title={impact.headline} intro={impact.intro} />
+        <SectionHeading eyebrow={ui.impact.eyebrow} title={impact.headline} intro={impact.intro} />
       </Reveal>
 
       {/* Scorecard */}
       <Reveal delay={0.1} className="mt-12 rounded-3xl card p-6 sm:p-8">
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <p className="eyebrow">Strategic business scorecard</p>
-          <p className="text-xs text-muted">Reported quarterly to regional leadership</p>
+          <p className="eyebrow">{ui.impact.scorecard}</p>
+          <p className="text-xs text-muted">{ui.impact.reported}</p>
         </div>
         <Stagger className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
           {impact.kpis.map((k, i) => (
@@ -43,8 +44,8 @@ export function BusinessImpactSection() {
       {/* Value framework */}
       <div className="mt-12 grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
         <Reveal>
-          <p className="eyebrow mb-4">Interactive business value framework</p>
-          <ul className="grid gap-2" role="tablist" aria-label="Value drivers">
+          <p className="eyebrow mb-4">{ui.impact.framework}</p>
+          <ul className="grid gap-2" role="tablist" aria-label={ui.impact.valueDrivers}>
             {impact.valueFramework.map((v) => {
               const isActive = v.id === activeValue;
               return (
@@ -80,7 +81,7 @@ export function BusinessImpactSection() {
           </div>
           <div className="mt-6">
             <div className="flex items-center justify-between text-xs text-muted">
-              <span>Opportunities in this proposal that contribute to {active.title.toLowerCase()}</span>
+              <span>{ui.impact.contributing(active.title)}</span>
               <span className="font-mono">{matching.length} / {allOpportunities.length}</span>
             </div>
             <div className="mt-2 h-2 overflow-hidden rounded-full bg-foreground/10">
@@ -98,7 +99,7 @@ export function BusinessImpactSection() {
               <li key={o.id} className="flex items-start gap-2 text-sm text-muted-strong"><span className="mt-2 size-1.5 shrink-0 rounded-full" style={{ background: active.color }} /> {o.name}</li>
             ))}
           </ul>
-          <p className="mt-5 text-[11px] text-muted">Counts reflect the hypotheses in the opportunity explorer, not forecasts of outcomes.</p>
+          <p className="mt-5 text-[11px] text-muted">{ui.impact.countsNote}</p>
         </Reveal>
       </div>
 

@@ -7,8 +7,8 @@ export const hero = {
   valueStatement:
     "I bridge the gap between artificial intelligence, business strategy, and execution — identifying opportunities, building solutions, and creating new paths for business growth.",
   primaryCtas: [
-    { label: "Explore My Proposal", target: "why-gft", variant: "primary" as const },
-    { label: "Discover AI Opportunities", target: "opportunities", variant: "secondary" as const },
+    { label: "Explore My Proposal", target: "why-gft" },
+    { label: "Discover AI Opportunities", target: "opportunities" },
   ],
   secondaryCtas: [
     { label: "View My Experience", target: "experience" },

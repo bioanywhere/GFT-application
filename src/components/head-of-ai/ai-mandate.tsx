@@ -3,23 +3,25 @@
 import { useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { CheckCircle2, Gauge, Package, Sparkles } from "lucide-react";
-import { aiMandate } from "@/content/head-of-ai";
+import { useContent } from "@/components/layout/locale-provider";
 import { cn } from "@/lib/utils";
 import { Section, SectionHeading } from "@/components/layout/section";
 import { Reveal } from "@/components/layout/reveal";
 import { Icon } from "@/components/ui/icon";
 
 export function AiMandateSection() {
+  const { ai, ui } = useContent();
+  const aiMandate = ai.mandate;
   const [activeId, setActiveId] = useState(aiMandate.areas[0].id);
   const reduce = useReducedMotion();
   const area = aiMandate.areas.find((a) => a.id === activeId) ?? aiMandate.areas[0];
 
   return (
     <Section id="ai-mandate">
-      <Reveal><SectionHeading eyebrow="03 · The Mandate" title={aiMandate.headline} intro={aiMandate.intro} /></Reveal>
+      <Reveal><SectionHeading eyebrow={ui.ai.mandateEyebrow} title={aiMandate.headline} intro={aiMandate.intro} /></Reveal>
       <div className="mt-12 grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
         <Reveal>
-          <ul className="grid gap-2 sm:grid-cols-2 lg:grid-cols-1" role="tablist" aria-label="Responsibility areas">
+          <ul className="grid gap-2 sm:grid-cols-2 lg:grid-cols-1" role="tablist" aria-label={ui.ai.responsibilityAreas}>
             {aiMandate.areas.map((a) => {
               const isActive = a.id === activeId;
               return (
@@ -54,11 +56,11 @@ export function AiMandateSection() {
               transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
               className="rounded-3xl card p-6 sm:p-8"
             >
-              <p className="eyebrow">Responsibility {area.number}</p>
+              <p className="eyebrow">{ui.ai.responsibility} {area.number}</p>
               <h3 className="display mt-2 text-3xl sm:text-4xl">{area.title}</h3>
               <p className="mt-4 text-base leading-relaxed text-muted-strong">{area.summary}</p>
               <div className="mt-6">
-                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">What the role is accountable for</p>
+                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">{ui.ai.accountableFor}</p>
                 <ul className="mt-3 grid gap-2">
                   {area.responsibilities.map((r) => (
                     <li key={r} className="flex items-start gap-2 text-sm leading-relaxed text-muted-strong"><CheckCircle2 className="mt-0.5 size-4 shrink-0 text-accent-emerald" /> {r}</li>
@@ -67,20 +69,20 @@ export function AiMandateSection() {
               </div>
               <div className="mt-6 grid gap-5 sm:grid-cols-2">
                 <div>
-                  <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted"><Package className="size-3.5" /> Deliverables</p>
+                  <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted"><Package className="size-3.5" /> {ui.engine.deliverables}</p>
                   <ul className="mt-3 flex flex-wrap gap-2">
                     {area.deliverables.map((d) => <li key={d} className="rounded-full border border-border bg-background-elevated px-3 py-1 text-xs font-medium">{d}</li>)}
                   </ul>
                 </div>
                 <div>
-                  <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted"><Gauge className="size-3.5" /> KPIs</p>
+                  <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted"><Gauge className="size-3.5" /> {ui.ai.blocks.kpis}</p>
                   <ul className="mt-3 grid gap-1.5">
                     {area.kpis.map((k) => <li key={k} className="text-sm text-muted-strong">· {k}</li>)}
                   </ul>
                 </div>
               </div>
               <div className="mt-6 rounded-2xl border border-accent-cyan/30 bg-accent-cyan/5 p-4">
-                <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-accent-cyan"><Sparkles className="size-3.5" /> Outcome</p>
+                <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-accent-cyan"><Sparkles className="size-3.5" /> {ui.ai.outcome}</p>
                 <p className="mt-2 text-sm leading-relaxed">{area.outcome}</p>
               </div>
             </motion.div>

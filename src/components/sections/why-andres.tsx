@@ -1,7 +1,7 @@
 "use client";
 
 import { Plus, Equal, GraduationCap, Award } from "lucide-react";
-import { profile, site } from "@/content";
+import { useContent } from "@/components/layout/locale-provider";
 import { Section, SectionHeading } from "@/components/layout/section";
 import { Reveal, Stagger, StaggerItem } from "@/components/layout/reveal";
 import { Icon } from "@/components/ui/icon";
@@ -9,10 +9,11 @@ import { CapabilityRadar } from "@/components/visuals/capability-radar";
 import { CapabilityConstellation } from "@/components/visuals/capability-constellation";
 
 export function WhyAndresSection() {
+  const { profile, site, ui } = useContent();
   return (
     <Section id="why-andres">
       <Reveal>
-        <SectionHeading eyebrow="05 · Why Andrés" title={profile.headline} />
+        <SectionHeading eyebrow={ui.whyAndres.eyebrow} title={profile.headline} />
       </Reveal>
 
       <Reveal delay={0.1} className="mt-8 flex flex-wrap items-center gap-2 text-sm font-semibold sm:text-base">
@@ -22,7 +23,7 @@ export function WhyAndresSection() {
             {i < profile.formula.length - 1 ? <Plus className="size-4 text-muted" /> : <Equal className="size-4 text-muted" />}
           </span>
         ))}
-        <span className="gradient-text rounded-full px-2 py-2">AI Business Innovation Leader</span>
+        <span className="gradient-text rounded-full px-2 py-2">{ui.whyAndres.formulaResult}</span>
       </Reveal>
 
       <div className="mt-12 grid gap-8 lg:grid-cols-[1fr_1fr]">
@@ -43,7 +44,7 @@ export function WhyAndresSection() {
           </div>
           <div className="mt-6 grid gap-4 border-t border-border pt-6 sm:grid-cols-2">
             <div>
-              <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted"><GraduationCap className="size-3.5" /> Education</p>
+              <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted"><GraduationCap className="size-3.5" /> {ui.whyAndres.education}</p>
               <ul className="mt-2 space-y-1.5 text-sm">
                 {profile.education.map((e) => (
                   <li key={e.institution}><span className="font-medium">{e.institution}</span> <span className="text-muted">· {e.program}</span></li>
@@ -51,7 +52,7 @@ export function WhyAndresSection() {
               </ul>
             </div>
             <div>
-              <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted"><Award className="size-3.5" /> Recognition</p>
+              <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted"><Award className="size-3.5" /> {ui.whyAndres.recognition}</p>
               <ul className="mt-2 space-y-1.5 text-sm">
                 {profile.recognitions.slice(0, 4).map((r) => (
                   <li key={r.text} className="text-muted-strong"><span className="font-mono text-xs text-muted">{r.year}</span> {r.text}</li>
@@ -84,13 +85,13 @@ export function WhyAndresSection() {
 
       <div className="mt-12 grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
         <Reveal className="rounded-3xl card p-6">
-          <p className="eyebrow">Capability profile</p>
+          <p className="eyebrow">{ui.whyAndres.capabilityProfile}</p>
           <CapabilityRadar />
           <p className="text-center text-[11px] text-muted">{profile.radarNote}</p>
         </Reveal>
         <Reveal delay={0.1} className="rounded-3xl card p-6 sm:p-8">
-          <p className="eyebrow">Leadership capabilities</p>
-          <p className="mt-2 mb-5 text-sm text-muted">Fourteen capabilities across four dimensions. Select a dimension to see how they combine.</p>
+          <p className="eyebrow">{ui.whyAndres.leadershipCapabilities}</p>
+          <p className="mt-2 mb-5 text-sm text-muted">{ui.whyAndres.capabilitiesNote}</p>
           <CapabilityConstellation />
         </Reveal>
       </div>

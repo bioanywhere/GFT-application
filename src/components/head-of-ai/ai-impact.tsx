@@ -2,23 +2,25 @@
 
 import { useState } from "react";
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
-import { aiImpact } from "@/content/head-of-ai";
+import { useContent } from "@/components/layout/locale-provider";
 import { cn } from "@/lib/utils";
 import { Section, SectionHeading } from "@/components/layout/section";
 import { Reveal, Stagger, StaggerItem } from "@/components/layout/reveal";
 import { Icon } from "@/components/ui/icon";
 
 export function AiImpactSection() {
+  const { ai, ui } = useContent();
+  const aiImpact = ai.impact;
   const [leverId, setLeverId] = useState(aiImpact.levers[0].id);
   const lever = aiImpact.levers.find((l) => l.id === leverId)!;
   return (
     <Section id="ai-impact" tone="elevated">
-      <Reveal><SectionHeading eyebrow="08 · Measurable Impact" title={aiImpact.headline} intro={aiImpact.intro} /></Reveal>
+      <Reveal><SectionHeading eyebrow={ui.ai.impactEyebrow} title={aiImpact.headline} intro={aiImpact.intro} /></Reveal>
 
       <Reveal delay={0.1} className="mt-12 rounded-3xl card p-6 sm:p-8">
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <p className="eyebrow">AI execution scorecard</p>
-          <p className="text-xs text-muted">Reported quarterly to regional and global leadership</p>
+          <p className="eyebrow">{ui.ai.scorecard}</p>
+          <p className="text-xs text-muted">{ui.ai.reported}</p>
         </div>
         <Stagger className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
           {aiImpact.kpis.map((k, i) => (
@@ -35,8 +37,8 @@ export function AiImpactSection() {
 
       <div className="mt-12 grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
         <Reveal>
-          <p className="eyebrow mb-4">Value levers</p>
-          <ul className="grid gap-2" role="tablist" aria-label="Value levers">
+          <p className="eyebrow mb-4">{ui.ai.valueLevers}</p>
+          <ul className="grid gap-2" role="tablist" aria-label={ui.ai.valueLevers}>
             {aiImpact.levers.map((l) => {
               const isActive = l.id === leverId;
               return (
@@ -61,16 +63,16 @@ export function AiImpactSection() {
               <p className="text-sm text-muted">{lever.text}</p>
             </div>
           </div>
-          <p className="mt-6 text-xs font-semibold uppercase tracking-[0.14em] text-muted">Use cases in this proposal that pull this lever</p>
+          <p className="mt-6 text-xs font-semibold uppercase tracking-[0.14em] text-muted">{ui.ai.leverUseCases}</p>
           <ul className="mt-3 grid gap-2">
             {lever.examples.map((e) => <li key={e} className="flex items-center gap-2 rounded-xl border border-border bg-background-elevated/70 p-3 text-sm"><span className="size-1.5 rounded-full" style={{ background: lever.color }} /> {e}</li>)}
           </ul>
           <div className="mt-8">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <p className="eyebrow">{aiImpact.maturity.title}</p>
-              <span className="rounded-full border border-accent-amber/50 bg-accent-amber/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-accent-amber">Hypothetical</span>
+              <span className="rounded-full border border-accent-amber/50 bg-accent-amber/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-accent-amber">{ui.common.hypothetical}</span>
             </div>
-            <div className="mt-4 h-[220px] w-full" role="img" aria-label="Illustrative bar chart of systems in production and business units adopting AI across four quarters">
+            <div className="mt-4 h-[220px] w-full" role="img" aria-label={ui.ai.maturityAria}>
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={aiImpact.maturity.stages} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                   <CartesianGrid stroke="var(--border)" vertical={false} />
@@ -78,8 +80,8 @@ export function AiImpactSection() {
                   <YAxis tick={{ fill: "var(--muted)", fontSize: 11 }} axisLine={false} tickLine={false} allowDecimals={false} />
                   <Tooltip cursor={{ fill: "var(--border)" }} contentStyle={{ background: "var(--card-solid)", border: "1px solid var(--border)", borderRadius: 12, fontSize: 12, color: "var(--foreground)" }} />
                   <Legend wrapperStyle={{ fontSize: 11, color: "var(--muted)" }} />
-                  <Bar dataKey="systems" name="Systems in production" fill="var(--accent-cyan)" radius={[6, 6, 0, 0]} />
-                  <Bar dataKey="units" name="Business units adopting" fill="var(--accent-emerald)" radius={[6, 6, 0, 0]} />
+                  <Bar dataKey="systems" name={ui.ai.seriesSystems} fill="var(--accent-cyan)" radius={[6, 6, 0, 0]} />
+                  <Bar dataKey="units" name={ui.ai.seriesUnits} fill="var(--accent-emerald)" radius={[6, 6, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>

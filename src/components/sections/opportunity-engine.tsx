@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ArrowRight, CheckCircle2, Target, Package, Gem, Gauge } from "lucide-react";
-import { engine } from "@/content";
+import { useContent } from "@/components/layout/locale-provider";
 import { cn } from "@/lib/utils";
 import { Section, SectionHeading } from "@/components/layout/section";
 import { Reveal } from "@/components/layout/reveal";
@@ -11,6 +11,7 @@ import { Icon } from "@/components/ui/icon";
 import { VentureLifecycle } from "@/components/visuals/venture-lifecycle";
 
 export function OpportunityEngineSection() {
+  const { engine, ui } = useContent();
   const [activeId, setActiveId] = useState(engine.stages[0].id);
   const reduce = useReducedMotion();
   const stage = engine.stages.find((s) => s.id === activeId) ?? engine.stages[0];
@@ -19,7 +20,7 @@ export function OpportunityEngineSection() {
   return (
     <Section id="engine">
       <Reveal>
-        <SectionHeading eyebrow="03 · The AI Business Opportunity Engine" title={engine.headline} intro={engine.intro} />
+        <SectionHeading eyebrow={ui.engine.eyebrow} title={engine.headline} intro={engine.intro} />
       </Reveal>
 
       {/* Process rail */}
@@ -32,7 +33,7 @@ export function OpportunityEngineSection() {
             transition={{ duration: reduce ? 0 : 0.6, ease: [0.22, 1, 0.36, 1] }}
             aria-hidden
           />
-          <div role="tablist" aria-label="Framework stages" className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+          <div role="tablist" aria-label={ui.engine.stagesAria} className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
             {engine.stages.map((s, i) => {
               const active = s.id === activeId;
               const done = i < activeIndex;
@@ -85,21 +86,21 @@ export function OpportunityEngineSection() {
             className="grid gap-6 rounded-3xl card p-6 sm:p-8 lg:grid-cols-[1fr_1.4fr]"
           >
             <div>
-              <p className="eyebrow">Stage 0{activeIndex + 1}</p>
+              <p className="eyebrow">{ui.engine.stage} 0{activeIndex + 1}</p>
               <h3 className="display mt-2 text-3xl sm:text-4xl">{stage.label}</h3>
               <p className="mt-4 text-base leading-relaxed text-muted-strong">{stage.summary}</p>
               <div className="mt-6 rounded-2xl bg-foreground/5 p-4">
-                <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted"><Target className="size-3.5" /> Strategic objective</p>
+                <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted"><Target className="size-3.5" /> {ui.engine.strategicObjective}</p>
                 <p className="mt-2 text-sm leading-relaxed">{stage.objective}</p>
               </div>
               <div className="mt-4 rounded-2xl border border-accent-blue/30 bg-accent-blue/5 p-4">
-                <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-accent-blue"><Gem className="size-3.5" /> Business value</p>
+                <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-accent-blue"><Gem className="size-3.5" /> {ui.engine.businessValue}</p>
                 <p className="mt-2 text-sm leading-relaxed">{stage.businessValue}</p>
               </div>
             </div>
             <div className="grid gap-5 sm:grid-cols-2">
               <div className="sm:col-span-2">
-                <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted"><ArrowRight className="size-3.5" /> Key activities</p>
+                <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted"><ArrowRight className="size-3.5" /> {ui.engine.keyActivities}</p>
                 <ul className="mt-3 grid gap-2 sm:grid-cols-2">
                   {stage.activities.map((a) => (
                     <li key={a} className="flex items-start gap-2 text-sm leading-relaxed text-muted-strong">
@@ -109,7 +110,7 @@ export function OpportunityEngineSection() {
                 </ul>
               </div>
               <div>
-                <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted"><Package className="size-3.5" /> Deliverables</p>
+                <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted"><Package className="size-3.5" /> {ui.engine.deliverables}</p>
                 <ul className="mt-3 flex flex-wrap gap-2">
                   {stage.deliverables.map((d) => (
                     <li key={d} className="rounded-full border border-border bg-background-elevated px-3 py-1 text-xs font-medium">{d}</li>
@@ -117,7 +118,7 @@ export function OpportunityEngineSection() {
                 </ul>
               </div>
               <div>
-                <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted"><Gauge className="size-3.5" /> Relevant KPIs</p>
+                <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted"><Gauge className="size-3.5" /> {ui.engine.relevantKpis}</p>
                 <ul className="mt-3 grid gap-1.5">
                   {stage.kpis.map((k) => (
                     <li key={k} className="text-sm text-muted-strong">· {k}</li>
@@ -130,8 +131,8 @@ export function OpportunityEngineSection() {
       </div>
 
       <Reveal className="mt-16">
-        <p className="eyebrow mb-2 text-center">AI venture lifecycle</p>
-        <p className="mx-auto mb-8 max-w-xl text-center text-sm text-muted">Every opportunity moves through the same gates. Only those that survive validation consume engineering capacity.</p>
+        <p className="eyebrow mb-2 text-center">{ui.engine.lifecycleEyebrow}</p>
+        <p className="mx-auto mb-8 max-w-xl text-center text-sm text-muted">{ui.engine.lifecycleNote}</p>
         <VentureLifecycle />
       </Reveal>
     </Section>

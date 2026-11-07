@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
-import { hero } from "@/content";
+import { useContent } from "@/components/layout/locale-provider";
 
 const R = 150;
 const CX = 200;
@@ -13,13 +13,14 @@ function polar(angle: number, r = R) {
 }
 
 export function HeroNetwork() {
+  const { hero, ui } = useContent();
   const reduce = useReducedMotion();
   const nodes = hero.networkNodes.map((n) => ({ ...n, ...polar(n.angle) }));
 
   return (
     <div className="relative mx-auto aspect-square w-full max-w-[520px]">
       <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_center,var(--glow),transparent_60%)] blur-2xl" aria-hidden />
-      <svg viewBox="0 0 400 400" className="relative h-full w-full" role="img" aria-label="Artificial intelligence connecting banking, sustainability, social impact, fintech, enterprise automation and emerging markets">
+      <svg viewBox="0 0 400 400" className="relative h-full w-full" role="img" aria-label={ui.hero.networkAria}>
         <defs>
           <linearGradient id="hn-grad" x1="0" x2="1" y1="0" y2="1">
             <stop offset="0%" stopColor="var(--accent-blue)" />

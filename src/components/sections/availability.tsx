@@ -1,7 +1,7 @@
 "use client";
 
 import { Clock, Globe2, Languages, MapPin } from "lucide-react";
-import { availability, site } from "@/content";
+import { useContent } from "@/components/layout/locale-provider";
 import { Section, SectionHeading } from "@/components/layout/section";
 import { Reveal, Stagger, StaggerItem } from "@/components/layout/reveal";
 import { WorldMap } from "@/components/visuals/world-map";
@@ -9,10 +9,11 @@ import { WorldMap } from "@/components/visuals/world-map";
 const icons = [Clock, Languages, MapPin, Globe2];
 
 export function AvailabilitySection() {
+  const { availability, site, ui } = useContent();
   return (
     <Section id="availability" tone="elevated">
       <Reveal>
-        <SectionHeading eyebrow="10 · Global Availability" title={availability.headline} />
+        <SectionHeading eyebrow={ui.availability.eyebrow} title={availability.headline} />
       </Reveal>
       <div className="mt-12 grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
         <div>

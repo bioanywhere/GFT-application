@@ -1,21 +1,22 @@
 "use client";
 
 import { CheckCircle2, ExternalLink, Lightbulb, ShieldCheck } from "lucide-react";
-import { whyGft, site } from "@/content";
+import { useContent } from "@/components/layout/locale-provider";
 import { Section, SectionHeading } from "@/components/layout/section";
 import { Reveal, Stagger, StaggerItem } from "@/components/layout/reveal";
 import { Badge } from "@/components/ui/badge";
 import { Icon } from "@/components/ui/icon";
 
 export function WhyGftSection() {
+  const { whyGft, site, ui } = useContent();
   return (
     <Section id="why-gft" tone="elevated">
       <Reveal>
-        <SectionHeading eyebrow="02 · Why GFT, Why Now" title={whyGft.headline} intro={whyGft.intro} />
+        <SectionHeading eyebrow={ui.whyGft.eyebrow} title={whyGft.headline} intro={whyGft.intro} />
       </Reveal>
 
       <Reveal delay={0.1} className="mt-12 gradient-border rounded-3xl card p-6 sm:p-10">
-        <p className="eyebrow mb-3">Core message</p>
+        <p className="eyebrow mb-3">{ui.whyGft.coreMessage}</p>
         <p className="display text-balance text-xl sm:text-2xl lg:text-3xl !leading-snug !font-medium">“{whyGft.coreMessage}”</p>
       </Reveal>
 
@@ -60,7 +61,7 @@ export function WhyGftSection() {
       </div>
 
       <div className="mt-16">
-        <Reveal><p className="eyebrow mb-6 text-center">Three strategic pillars</p></Reveal>
+        <Reveal><p className="eyebrow mb-6 text-center">{ui.whyGft.threePillars}</p></Reveal>
         <Stagger className="grid gap-4 md:grid-cols-3">
           {whyGft.pillars.map((p, i) => (
             <StaggerItem key={p.id} className="group relative overflow-hidden rounded-3xl card p-7 transition-transform duration-300 hover:-translate-y-1">
@@ -79,7 +80,7 @@ export function WhyGftSection() {
       </div>
 
       <Reveal className="mt-14 rounded-2xl border border-border p-5 text-xs text-muted">
-        <p className="mb-2 font-semibold uppercase tracking-[0.16em]">Sources · official GFT publications</p>
+        <p className="mb-2 font-semibold uppercase tracking-[0.16em]">{ui.whyGft.sources}</p>
         <ul className="grid gap-1.5 sm:grid-cols-2">
           {whyGft.sources.map((s) => (
             <li key={s.url}>
@@ -90,9 +91,7 @@ export function WhyGftSection() {
             </li>
           ))}
         </ul>
-        <p className="mt-3">
-          Verified facts are taken from GFT’s public communications as of the date of this proposal. Everything else on this site is an independent proposal by {site.candidate.name} and does not represent GFT’s internal plans.
-        </p>
+        <p className="mt-3">{ui.whyGft.sourcesNote(site.candidate.name)}</p>
       </Reveal>
     </Section>
   );

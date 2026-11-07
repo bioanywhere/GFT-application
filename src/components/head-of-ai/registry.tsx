@@ -1,5 +1,6 @@
 import type { SectionEntry } from "@/components/layout/types";
-import { aiNavigation, aiOperatingModel, aiRoadmap } from "@/content/head-of-ai";
+import { aiNavigation } from "@/content/head-of-ai";
+import { useContent } from "@/components/layout/locale-provider";
 import { AiHeroSection } from "./ai-hero";
 import { AiContextSection } from "./ai-context";
 import { AiMandateSection } from "./ai-mandate";
@@ -13,10 +14,12 @@ import { RoadmapSection } from "@/components/sections/roadmap";
 import { StrategicFitSection } from "@/components/sections/strategic-fit";
 
 function AiRoadmapSection() {
-  return <RoadmapSection id="ai-roadmap" eyebrow="09 · First 90 Days as Head of AI" data={aiRoadmap} tone="default" />;
+  const { ai, ui } = useContent();
+  return <RoadmapSection id="ai-roadmap" eyebrow={ui.ai.roadmapEyebrow} data={ai.roadmap} tone="default" />;
 }
 function AiOperatingModelSection() {
-  return <StrategicFitSection id="ai-operating-model" eyebrow="10 · Operating Model" data={aiOperatingModel} tone="elevated" centerLabel={{ top: "Regional", main: "Head of AI" }} />;
+  const { ai, ui } = useContent();
+  return <StrategicFitSection id="ai-operating-model" eyebrow={ui.ai.operatingModelEyebrow} data={ai.operatingModel} tone="elevated" centerLabel={{ top: ui.ai.centerTop, main: ui.ai.centerMain }} />;
 }
 
 const components: Record<(typeof aiNavigation)[number]["id"], React.ComponentType> = {

@@ -4,28 +4,32 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "motion/react";
 import { Cpu, Rocket, Scale } from "lucide-react";
-import { proposalForPath, proposals } from "@/content/proposals";
+import { proposalForPath } from "@/content/proposals";
+import { localePath } from "@/content/locale";
+import { useContent } from "@/components/layout/locale-provider";
 import { cn } from "@/lib/utils";
 
 const icons = { ventures: Rocket, ai: Cpu, compare: Scale } as const;
 
-export function ProposalSwitcher({ className, layoutId = "proposal-tab-pill", onNavigate }: { className?: string; layoutId?: string; onNavigate?: () => void }) {
+export function ProposalSwitcher({ className, itemClassName, layoutId = "proposal-tab-pill", onNavigate }: { className?: string; itemClassName?: string; layoutId?: string; onNavigate?: () => void }) {
   const pathname = usePathname();
+  const { proposals, locale, ui } = useContent();
   const active = proposalForPath(pathname ?? "/");
   return (
-    <nav aria-label="Proposals" className={cn("flex h-9 items-center gap-0.5 rounded-full border border-border bg-foreground/5 p-0.5", className)}>
+    <nav aria-label={ui.nav.proposalsLabel} className={cn("flex h-9 items-center gap-0.5 rounded-full border border-border bg-foreground/5 p-0.5", className)}>
       {proposals.map((p) => {
         const Icon = icons[p.id];
         const isActive = p.id === active;
         return (
           <Link
             key={p.id}
-            href={p.href}
+            href={localePath(p.path, locale)}
             onClick={onNavigate}
             aria-current={isActive ? "page" : undefined}
             className={cn(
               "relative flex h-8 items-center gap-1.5 whitespace-nowrap rounded-full px-3 text-[12px] font-medium transition focus-visible:outline-2 focus-visible:outline-(--ring)",
               isActive ? "text-background" : "text-muted hover:text-foreground",
+              itemClassName,
             )}
           >
             {isActive && (

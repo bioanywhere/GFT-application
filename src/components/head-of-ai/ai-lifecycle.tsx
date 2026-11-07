@@ -3,13 +3,15 @@
 import { useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { Lock } from "lucide-react";
-import { aiLifecycle } from "@/content/head-of-ai";
+import { useContent } from "@/components/layout/locale-provider";
 import { cn } from "@/lib/utils";
 import { Section, SectionHeading } from "@/components/layout/section";
 import { Reveal, Stagger, StaggerItem } from "@/components/layout/reveal";
 import { Icon } from "@/components/ui/icon";
 
 export function AiLifecycleSection() {
+  const { ai, ui } = useContent();
+  const aiLifecycle = ai.lifecycle;
   const [active, setActive] = useState(0);
   const reduce = useReducedMotion();
   const stages = aiLifecycle.stages;
@@ -17,7 +19,7 @@ export function AiLifecycleSection() {
 
   return (
     <Section id="ai-lifecycle" tone="elevated">
-      <Reveal><SectionHeading eyebrow="04 · Delivery Model" title={aiLifecycle.headline} intro={aiLifecycle.intro} /></Reveal>
+      <Reveal><SectionHeading eyebrow={ui.ai.lifecycleEyebrow} title={aiLifecycle.headline} intro={aiLifecycle.intro} /></Reveal>
 
       <Reveal delay={0.1} className="mt-12 rounded-3xl card p-6 sm:p-8">
         <div className="relative">
@@ -28,7 +30,7 @@ export function AiLifecycleSection() {
             transition={{ duration: reduce ? 0 : 0.5 }}
             aria-hidden
           />
-          <div role="tablist" aria-label="Delivery stages" className="grid grid-cols-3 gap-3 md:grid-cols-6">
+          <div role="tablist" aria-label={ui.ai.deliveryStages} className="grid grid-cols-3 gap-3 md:grid-cols-6">
             {stages.map((s, i) => {
               const isActive = i === active;
               const done = i < active;
@@ -45,13 +47,13 @@ export function AiLifecycleSection() {
         </div>
         <motion.div key={stage.id} initial={reduce ? false : { opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }} className="mt-8 grid gap-4 md:grid-cols-[1.4fr_1fr]">
           <div className="rounded-2xl bg-foreground/5 p-5">
-            <p className="eyebrow">Stage 0{active + 1} · {stage.label}</p>
+            <p className="eyebrow">{ui.engine.stage} 0{active + 1} · {stage.label}</p>
             <p className="mt-2 text-base leading-relaxed text-muted-strong">{stage.text}</p>
           </div>
           <div className="rounded-2xl border border-accent-emerald/30 bg-accent-emerald/5 p-5">
-            <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-accent-emerald"><Lock className="size-3.5" /> Gate to pass</p>
+            <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-accent-emerald"><Lock className="size-3.5" /> {ui.ai.gateToPass}</p>
             <p className="mt-2 text-base font-semibold">{stage.gate}</p>
-            <p className="mt-1 text-xs text-muted">Nothing advances without it.</p>
+            <p className="mt-1 text-xs text-muted">{ui.ai.nothingAdvances}</p>
           </div>
         </motion.div>
       </Reveal>
@@ -59,7 +61,7 @@ export function AiLifecycleSection() {
       <Stagger className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {aiLifecycle.principles.map((p, i) => (
           <StaggerItem key={p.title} className="rounded-2xl card p-5">
-            <p className="font-mono text-[10px] text-accent-cyan">PRINCIPLE 0{i + 1}</p>
+            <p className="font-mono text-[10px] text-accent-cyan">{ui.ai.principle} 0{i + 1}</p>
             <p className="mt-2 font-semibold">{p.title}</p>
             <p className="mt-1.5 text-sm leading-relaxed text-muted">{p.text}</p>
           </StaggerItem>

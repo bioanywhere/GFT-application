@@ -3,7 +3,8 @@
 import { useMemo, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ArrowUpRight, Filter, RotateCcw, Sparkles } from "lucide-react";
-import { commercialModels, explorer, industries, valueDrivers, type CommercialModel, type Industry, type Opportunity, type ValueDriver } from "@/content";
+import type { CommercialModel, Industry, Opportunity, ValueDriver } from "@/content/types";
+import { useContent } from "@/components/layout/locale-provider";
 import { cn } from "@/lib/utils";
 import { Section, SectionHeading } from "@/components/layout/section";
 import { Reveal } from "@/components/layout/reveal";
@@ -31,6 +32,7 @@ const accentBadge: Record<Industry["accent"], "blue" | "emerald" | "amber" | "vi
 };
 
 export function OpportunityExplorerSection() {
+  const { commercialModels, explorer, industries, valueDrivers, ui } = useContent();
   const reduce = useReducedMotion();
   const [industryId, setIndustryId] = useState<string>("all");
   const [drivers, setDrivers] = useState<ValueDriver[]>([]);
@@ -45,7 +47,7 @@ export function OpportunityExplorerSection() {
         (drivers.length === 0 || drivers.some((d) => o.valueDrivers.includes(d))) &&
         (models.length === 0 || models.some((m) => o.commercialModels.includes(m))),
     );
-  }, [industryId, drivers, models]);
+  }, [industryId, drivers, models, industries]);
 
   const toggle = <T,>(list: T[], item: T, set: (v: T[]) => void) =>
     set(list.includes(item) ? list.filter((x) => x !== item) : [...list, item]);
@@ -56,7 +58,7 @@ export function OpportunityExplorerSection() {
   return (
     <Section id="opportunities" tone="elevated">
       <Reveal>
-        <SectionHeading eyebrow="04 · AI Opportunity Explorer" title={explorer.headline} intro={explorer.intro} />
+        <SectionHeading eyebrow={ui.explorer.eyebrow} title={explorer.headline} intro={explorer.intro} />
       </Reveal>
 
       {/* Industry selector */}
@@ -71,8 +73,8 @@ export function OpportunityExplorerSection() {
             aria-pressed={industryId === "all"}
           >
             <Sparkles className="size-5" />
-            <span className="mt-3 text-sm font-semibold">All industries</span>
-            <span className={cn("mt-0.5 text-xs", industryId === "all" ? "text-background/70" : "text-muted")}>{industries.reduce((n, i) => n + i.opportunities.length, 0)} opportunities</span>
+            <span className="mt-3 text-sm font-semibold">{ui.explorer.allIndustries}</span>
+            <span className={cn("mt-0.5 text-xs", industryId === "all" ? "text-background/70" : "text-muted")}>{industries.reduce((n, i) => n + i.opportunities.length, 0)} {ui.explorer.opportunities}</span>
           </button>
           {industries.map((ind) => {
             const active = industryId === ind.id;
@@ -88,7 +90,7 @@ export function OpportunityExplorerSection() {
               >
                 <Icon name={ind.icon} className={cn("size-5", accentText[ind.accent])} />
                 <span className="mt-3 text-sm font-semibold leading-tight">{ind.short}</span>
-                <span className="mt-0.5 text-xs text-muted">{ind.opportunities.length} opportunities</span>
+                <span className="mt-0.5 text-xs text-muted">{ind.opportunities.length} {ui.explorer.opportunities}</span>
               </button>
             );
           })}
@@ -106,15 +108,15 @@ export function OpportunityExplorerSection() {
           className="mt-6 grid gap-4 rounded-3xl card p-6 lg:grid-cols-[1.2fr_1fr]"
         >
           <div>
-            <p className="eyebrow">{activeIndustry ? activeIndustry.name : "Cross-industry portfolio"}</p>
+            <p className="eyebrow">{activeIndustry ? activeIndustry.name : ui.explorer.crossIndustry}</p>
             <p className="mt-2 text-base leading-relaxed text-muted-strong">
-              {activeIndustry ? activeIndustry.summary : "A balanced portfolio across five territories. The first opportunities to pursue are the ones closest to GFT's existing clients; the rest extend into adjacent markets where the same capabilities apply."}
+              {activeIndustry ? activeIndustry.summary : ui.explorer.crossIndustryText}
             </p>
           </div>
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">Commercial value for GFT</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">{ui.explorer.commercialValue}</p>
             <ul className="mt-2 flex flex-wrap gap-2">
-              {(activeIndustry ? activeIndustry.commercialValue : ["New business lines", "Recurring revenue", "Reusable assets", "Market expansion", "Higher-value engagements"]).map((v) => (
+              {(activeIndustry ? activeIndustry.commercialValue : ui.explorer.crossIndustryValue).map((v) => (
                 <li key={v} className="rounded-full border border-border bg-background-elevated px-3 py-1 text-xs">{v}</li>
               ))}
             </ul>
@@ -126,15 +128,15 @@ export function OpportunityExplorerSection() {
       <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-2">
           <Button variant="outline" size="sm" onClick={() => setFiltersOpen((v) => !v)} aria-expanded={filtersOpen} aria-controls="explorer-filters">
-            <Filter /> Filters {hasFilters && <span className="ml-1 rounded-full bg-foreground px-1.5 text-[10px] text-background">{drivers.length + models.length}</span>}
+            <Filter /> {ui.common.filters} {hasFilters && <span className="ml-1 rounded-full bg-foreground px-1.5 text-[10px] text-background">{drivers.length + models.length}</span>}
           </Button>
           {hasFilters && (
             <Button variant="ghost" size="sm" onClick={() => { setDrivers([]); setModels([]); }}>
-              <RotateCcw /> Reset
+              <RotateCcw /> {ui.common.reset}
             </Button>
           )}
         </div>
-        <p className="text-sm text-muted" aria-live="polite">{results.length} {results.length === 1 ? "opportunity" : "opportunities"} shown</p>
+        <p className="text-sm text-muted" aria-live="polite">{results.length} {results.length === 1 ? ui.explorer.opportunity : ui.explorer.opportunities} {ui.explorer.shown}</p>
       </div>
       <AnimatePresence initial={false}>
         {filtersOpen && (
@@ -148,18 +150,18 @@ export function OpportunityExplorerSection() {
           >
             <div className="mt-3 grid gap-5 rounded-2xl border border-border p-5 md:grid-cols-2">
               <fieldset>
-                <legend className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">Business value</legend>
+                <legend className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">{ui.explorer.businessValueFilter}</legend>
                 <div className="mt-3 flex flex-wrap gap-2">
                   {valueDrivers.map((d) => (
-                    <button key={d} onClick={() => toggle(drivers, d, setDrivers)} aria-pressed={drivers.includes(d)} className={cn("rounded-full border px-3 py-1.5 text-xs font-medium transition", drivers.includes(d) ? "border-accent-blue bg-accent-blue/15 text-accent-blue" : "border-border hover:border-border-strong")}>{d}</button>
+                    <button key={d} onClick={() => toggle(drivers, d, setDrivers)} aria-pressed={drivers.includes(d)} className={cn("rounded-full border px-3 py-1.5 text-xs font-medium transition", drivers.includes(d) ? "border-accent-blue bg-accent-blue/15 text-accent-blue" : "border-border hover:border-border-strong")}>{ui.explorer.driverLabels[d]}</button>
                   ))}
                 </div>
               </fieldset>
               <fieldset>
-                <legend className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">Commercial model</legend>
+                <legend className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">{ui.explorer.commercialModelFilter}</legend>
                 <div className="mt-3 flex flex-wrap gap-2">
                   {commercialModels.map((m) => (
-                    <button key={m} onClick={() => toggle(models, m, setModels)} aria-pressed={models.includes(m)} className={cn("rounded-full border px-3 py-1.5 text-xs font-medium transition", models.includes(m) ? "border-accent-violet bg-accent-violet/15 text-accent-violet" : "border-border hover:border-border-strong")}>{m}</button>
+                    <button key={m} onClick={() => toggle(models, m, setModels)} aria-pressed={models.includes(m)} className={cn("rounded-full border px-3 py-1.5 text-xs font-medium transition", models.includes(m) ? "border-accent-violet bg-accent-violet/15 text-accent-violet" : "border-border hover:border-border-strong")}>{ui.explorer.modelLabels[m]}</button>
                   ))}
                 </div>
               </fieldset>
@@ -193,14 +195,14 @@ export function OpportunityExplorerSection() {
                   <h3 className="mt-4 text-lg font-semibold leading-snug tracking-tight">{o.name}</h3>
                   <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-muted">{o.tagline}</p>
                   <div className="mt-auto pt-5">
-                    <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-muted">Business problem</p>
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-muted">{ui.explorer.businessProblem}</p>
                     <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-muted-strong">{o.problem}</p>
                     <div className="mt-4 flex flex-wrap gap-1.5">
                       {o.commercialModels.slice(0, 2).map((m) => (
-                        <span key={m} className="rounded-full bg-foreground/5 px-2 py-0.5 text-[10px] font-medium text-muted-strong">{m}</span>
+                        <span key={m} className="rounded-full bg-foreground/5 px-2 py-0.5 text-[10px] font-medium text-muted-strong">{ui.explorer.modelLabels[m]}</span>
                       ))}
                       {o.valueDrivers.slice(0, 1).map((d) => (
-                        <span key={d} className="rounded-full border border-border px-2 py-0.5 text-[10px] font-medium text-muted">{d}</span>
+                        <span key={d} className="rounded-full border border-border px-2 py-0.5 text-[10px] font-medium text-muted">{ui.explorer.driverLabels[d]}</span>
                       ))}
                     </div>
                   </div>
@@ -212,7 +214,7 @@ export function OpportunityExplorerSection() {
       </motion.ul>
       {results.length === 0 && (
         <div className="mt-6 rounded-2xl border border-dashed border-border-strong p-10 text-center text-sm text-muted">
-          No opportunities match this combination. Reset the filters to see the full portfolio.
+          {ui.explorer.noMatch}
         </div>
       )}
 

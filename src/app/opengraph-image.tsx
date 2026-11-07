@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
-import { site, hero } from "@/content";
+import { site } from "@/content/site";
+import { hero } from "@/content/hero";
 
 export const alt = `${site.primaryPosition} · Executive proposal for GFT Technologies`;
 export const size = { width: 1200, height: 630 };

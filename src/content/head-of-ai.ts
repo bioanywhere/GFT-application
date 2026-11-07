@@ -1,6 +1,8 @@
 import type { IconName, RoadmapPhase } from "./types";
 
-export const aiNavigation = [
+export type AiSectionId = "ai-proposal" | "ai-context" | "ai-mandate" | "ai-lifecycle" | "ai-usecases" | "ai-why-andres" | "ai-standards" | "ai-impact" | "ai-roadmap" | "ai-operating-model" | "ai-contact";
+
+export const aiNavigation: readonly { id: AiSectionId; label: string }[] = [
   { id: "ai-proposal", label: "Proposal" },
   { id: "ai-context", label: "Why Now" },
   { id: "ai-mandate", label: "Mandate" },
@@ -12,7 +14,7 @@ export const aiNavigation = [
   { id: "ai-roadmap", label: "90 Days" },
   { id: "ai-operating-model", label: "Operating Model" },
   { id: "ai-contact", label: "Contact" },
-] as const;
+];
 
 export const aiHero = {
   eyebrow: "A Strategic Execution Proposal for GFT Technologies",

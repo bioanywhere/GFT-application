@@ -3,7 +3,8 @@
 import { useMemo, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ArrowUpRight, Gauge, Layers, ListChecks, ShieldCheck, Target, Wrench } from "lucide-react";
-import { aiDomains, aiUseCasesSection, getAiDomain, type AiDomain, type AiUseCase } from "@/content/head-of-ai";
+import type { AiDomain, AiUseCase } from "@/content/head-of-ai";
+import { useContent } from "@/components/layout/locale-provider";
 import { cn } from "@/lib/utils";
 import { Section, SectionHeading } from "@/components/layout/section";
 import { Reveal } from "@/components/layout/reveal";
@@ -15,34 +16,38 @@ const accentText: Record<AiDomain["accent"], string> = { blue: "text-accent-blue
 const accentBg: Record<AiDomain["accent"], string> = { blue: "from-accent-blue/20", emerald: "from-accent-emerald/20", amber: "from-accent-amber/20", violet: "from-accent-violet/20", magenta: "from-accent-magenta/20" };
 
 export function AiUseCasesSection() {
+  const { ai, ui } = useContent();
+  const aiDomains = ai.domains;
+  const aiUseCasesSection = ai.useCasesSection;
+  const getAiDomain = (id: string) => aiDomains.find((d) => d.id === id);
   const reduce = useReducedMotion();
   const [domainId, setDomainId] = useState<string>("all");
   const [selected, setSelected] = useState<AiUseCase | null>(null);
-  const results = useMemo(() => (domainId === "all" ? aiDomains.flatMap((d) => d.useCases) : getAiDomain(domainId)?.useCases ?? []), [domainId]);
+  const results = useMemo(() => (domainId === "all" ? aiDomains.flatMap((d) => d.useCases) : aiDomains.find((d) => d.id === domainId)?.useCases ?? []), [domainId, aiDomains]);
   const activeDomain = getAiDomain(domainId);
 
   return (
     <Section id="ai-usecases">
-      <Reveal><SectionHeading eyebrow="05 · AI Use-Case Portfolio" title={aiUseCasesSection.headline} intro={aiUseCasesSection.intro} /></Reveal>
+      <Reveal><SectionHeading eyebrow={ui.ai.useCasesEyebrow} title={aiUseCasesSection.headline} intro={aiUseCasesSection.intro} /></Reveal>
 
       <Reveal delay={0.1} className="mt-10 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
         <button onClick={() => setDomainId("all")} aria-pressed={domainId === "all"} className={cn("flex flex-col items-start rounded-2xl border p-4 text-left transition focus-visible:outline-2 focus-visible:outline-(--ring)", domainId === "all" ? "border-foreground/40 bg-foreground text-background" : "border-border bg-background-elevated hover:border-border-strong")}>
           <Layers className="size-5" />
-          <span className="mt-3 text-sm font-semibold">All domains</span>
-          <span className={cn("mt-0.5 text-xs", domainId === "all" ? "text-background/70" : "text-muted")}>{aiDomains.reduce((n, d) => n + d.useCases.length, 0)} use cases</span>
+          <span className="mt-3 text-sm font-semibold">{ui.ai.allDomains}</span>
+          <span className={cn("mt-0.5 text-xs", domainId === "all" ? "text-background/70" : "text-muted")}>{aiDomains.reduce((n, d) => n + d.useCases.length, 0)} {ui.ai.useCases}</span>
         </button>
         {aiDomains.map((d) => (
           <button key={d.id} onClick={() => setDomainId(d.id)} aria-pressed={domainId === d.id} className={cn("relative flex flex-col items-start overflow-hidden rounded-2xl border p-4 text-left transition focus-visible:outline-2 focus-visible:outline-(--ring)", domainId === d.id ? "border-foreground/30 bg-gradient-to-br to-transparent " + accentBg[d.accent] : "border-border bg-background-elevated hover:border-border-strong")}>
             <Icon name={d.icon} className={cn("size-5", accentText[d.accent])} />
             <span className="mt-3 text-sm font-semibold leading-tight">{d.short}</span>
-            <span className="mt-0.5 text-xs text-muted">{d.useCases.length} use cases</span>
+            <span className="mt-0.5 text-xs text-muted">{d.useCases.length} {ui.ai.useCases}</span>
           </button>
         ))}
       </Reveal>
 
       <AnimatePresence mode="wait">
         <motion.p key={domainId} initial={reduce ? false : { opacity: 0 }} animate={{ opacity: 1 }} exit={reduce ? undefined : { opacity: 0 }} className="mt-5 max-w-3xl text-sm leading-relaxed text-muted-strong">
-          {activeDomain ? activeDomain.summary : "The portfolio spans client-facing and internal use cases. First priorities would be those with existing demand, available data, and a clear path to production inside GFT's platforms and standards."}
+          {activeDomain ? activeDomain.summary : ui.ai.portfolioNote}
         </motion.p>
       </AnimatePresence>
 
@@ -60,7 +65,7 @@ export function AiUseCasesSection() {
                   <h3 className="mt-4 text-base font-semibold leading-snug tracking-tight">{u.name}</h3>
                   <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-muted">{u.tagline}</p>
                   <div className="mt-auto pt-4">
-                    <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-muted">Primary KPI</p>
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-muted">{ui.ai.primaryKpi}</p>
                     <p className="mt-1 text-xs font-medium text-muted-strong">{u.kpis[0]}</p>
                   </div>
                 </button>
@@ -82,28 +87,28 @@ export function AiUseCasesSection() {
                   <div className="relative">
                     <div className="flex flex-wrap items-center gap-2">
                       <Badge variant={d.accent}><Icon name={d.icon} className="size-3" /> {d.name}</Badge>
-                      <Badge variant="outline">Implementation candidate</Badge>
+                      <Badge variant="outline">{ui.ai.implementationCandidate}</Badge>
                     </div>
                     <DialogTitle className="mt-4 pr-10 text-2xl sm:text-3xl">{selected.name}</DialogTitle>
                     <DialogDescription className="mt-2 max-w-2xl text-base">{selected.tagline}</DialogDescription>
                   </div>
                 </div>
                 <div className="grid gap-x-8 gap-y-6 p-6 sm:grid-cols-2 sm:p-8">
-                  <Block n="01" icon={Target} title="Business objective">{selected.objective}</Block>
-                  <Block n="02" icon={Wrench} title="AI approach">{selected.approach}</Block>
+                  <Block n="01" icon={Target} title={ui.ai.blocks.objective}>{selected.objective}</Block>
+                  <Block n="02" icon={Wrench} title={ui.ai.blocks.approach}>{selected.approach}</Block>
                   <div className="sm:col-span-2">
-                    <Block n="03" icon={ListChecks} title="Implementation path">
+                    <Block n="03" icon={ListChecks} title={ui.ai.blocks.implementation}>
                       <ol className="grid gap-1.5 sm:grid-cols-2">
                         {selected.implementation.map((s, i) => <li key={s} className="flex items-start gap-2 text-sm text-muted-strong"><span className="font-mono text-[10px] text-accent-cyan">{i + 1}</span> {s}</li>)}
                       </ol>
                     </Block>
                   </div>
-                  <Block n="04" icon={Gauge} title="KPIs"><ul className="flex flex-wrap gap-1.5">{selected.kpis.map((k) => <li key={k} className="rounded-full border border-border bg-background px-2.5 py-1 text-xs">{k}</li>)}</ul></Block>
-                  <Block n="05" icon={Layers} title="Capabilities required"><ul className="flex flex-wrap gap-1.5">{selected.capabilities.map((k) => <li key={k} className="rounded-full border border-border bg-background px-2.5 py-1 text-xs">{k}</li>)}</ul></Block>
-                  <Block n="06" icon={ShieldCheck} title="Governance considerations">{selected.governance}</Block>
-                  <Block n="07" icon={Target} title="Fit with GFT">{selected.gftFit}</Block>
+                  <Block n="04" icon={Gauge} title={ui.ai.blocks.kpis}><ul className="flex flex-wrap gap-1.5">{selected.kpis.map((k) => <li key={k} className="rounded-full border border-border bg-background px-2.5 py-1 text-xs">{k}</li>)}</ul></Block>
+                  <Block n="05" icon={Layers} title={ui.ai.blocks.capabilities}><ul className="flex flex-wrap gap-1.5">{selected.capabilities.map((k) => <li key={k} className="rounded-full border border-border bg-background px-2.5 py-1 text-xs">{k}</li>)}</ul></Block>
+                  <Block n="06" icon={ShieldCheck} title={ui.ai.blocks.governance}>{selected.governance}</Block>
+                  <Block n="07" icon={Target} title={ui.ai.blocks.fit}>{selected.gftFit}</Block>
                 </div>
-                <p className="border-t border-border px-6 py-4 text-[11px] leading-relaxed text-muted sm:px-8">Illustrative implementation candidate for prioritization with GFT leadership and clients. Not an existing GFT engagement or a guaranteed result.</p>
+                <p className="border-t border-border px-6 py-4 text-[11px] leading-relaxed text-muted sm:px-8">{ui.ai.dialogFooter}</p>
               </div>
             );
           })()}

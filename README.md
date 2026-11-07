@@ -4,11 +4,14 @@ An independent, interactive executive proposal site by **Andrés García Montoya
 Rohan Malik, COO Andean Region, GFT Technologies. It presents two distinct leadership
 contributions and a comparison between them:
 
-| Tab | Route | Orientation |
-| --- | --- | --- |
-| Head of AI Ventures & Business Innovation | `/` | Growth: identify, build, and commercialize new AI businesses |
-| Head of AI | `/head-of-ai` | Execution: AI strategy, engineering, adoption, governance, scale |
-| Compare Both | `/compare` | Side-by-side comparison, focus visualization, impact explorer, priority guide |
+| Tab | English | Spanish | Orientation |
+| --- | --- | --- | --- |
+| Head of AI Ventures & Business Innovation | `/` | `/es` | Growth: identify, build, and commercialize new AI businesses |
+| Head of AI | `/head-of-ai` | `/es/head-of-ai` | Execution: AI strategy, engineering, adoption, governance, scale |
+| Compare Both | `/compare` | `/es/compare` | Side-by-side comparison, focus visualization, impact explorer, priority guide |
+
+Every page is available in English and Spanish. The EN / ES toggle in the navigation bar switches the
+current page; each language has its own root layout, `hreflang` alternates, and sitemap entries.
 
 > From Artificial Intelligence to Business Opportunities. From Opportunities to Revenue.
 
@@ -44,7 +47,15 @@ npm start
 ## Updating the proposal content
 
 All copy, opportunities, roadmap, KPIs and candidate data live in `src/content/` as typed
-configuration objects. Components only render what they are given.
+configuration objects. Components read everything through a locale dictionary (`useContent()`),
+so they never contain hard-coded text.
+
+- English content: the files listed below, assembled in `src/content/en.ts`.
+- Spanish content: `src/content/es/` (`core.ts`, `opportunities.ts`, `head-of-ai.ts`, `compare.ts`, `ui.ts`),
+  assembled in `src/content/es/index.ts`. The Spanish dictionary is typed against the English one, so a
+  missing or mismatched field fails the type check.
+- Component UI strings (buttons, labels, eyebrows, chart captions): `src/content/ui.ts` and `src/content/es/ui.ts`.
+- Page titles and descriptions per language: `src/content/meta.ts`.
 
 | File | What it controls |
 | --- | --- |

@@ -3,13 +3,16 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ChevronLeft, ChevronRight, Maximize2, Minimize2, X } from "lucide-react";
-import type { SectionEntry } from "@/components/layout/types";
+import type { NavItem, SectionEntry } from "@/components/layout/types";
 import { usePresentation } from "./presentation-context";
+import { useContent } from "@/components/layout/locale-provider";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-export function PresentationMode({ sections }: { sections: readonly SectionEntry[] }) {
+export function PresentationMode({ sections, navigation }: { sections: readonly SectionEntry[]; navigation: readonly NavItem[] }) {
   const { active, index, close, next, prev, goTo, total } = usePresentation();
+  const { ui } = useContent();
+  const titleOf = (id: string) => navigation.find((n) => n.id === id)?.label ?? id;
   const reduce = useReducedMotion();
   const [dir, setDir] = useState<1 | -1>(1);
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -66,17 +69,17 @@ export function PresentationMode({ sections }: { sections: readonly SectionEntry
   const Slide = current.Component;
 
   return (
-    <div className="fixed inset-0 z-[80] flex flex-col bg-background" role="dialog" aria-modal="true" aria-label="Presentation mode">
+    <div className="fixed inset-0 z-[80] flex flex-col bg-background" role="dialog" aria-modal="true" aria-label={ui.nav.presentationLabel}>
       <div className="flex h-14 shrink-0 items-center justify-between border-b border-border px-4 sm:px-6">
         <div className="flex min-w-0 items-center gap-3">
           <span className="font-mono text-xs text-muted">{String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}</span>
-          <span className="truncate text-sm font-semibold">{current.title}</span>
+          <span className="truncate text-sm font-semibold">{titleOf(current.id)}</span>
         </div>
         <div className="flex items-center gap-1">
-          <Button variant="ghost" size="icon" onClick={toggleFullscreen} aria-label="Toggle fullscreen" className="hidden sm:inline-flex">
+          <Button variant="ghost" size="icon" onClick={toggleFullscreen} aria-label={ui.nav.toggleFullscreen} className="hidden sm:inline-flex">
             {isFullscreen ? <Minimize2 /> : <Maximize2 />}
           </Button>
-          <Button variant="outline" size="sm" onClick={close}><X /> Exit</Button>
+          <Button variant="outline" size="sm" onClick={close}><X /> {ui.common.exit}</Button>
         </div>
       </div>
 
@@ -97,20 +100,20 @@ export function PresentationMode({ sections }: { sections: readonly SectionEntry
       </div>
 
       <div className="flex h-16 shrink-0 items-center justify-between border-t border-border px-4 sm:px-6">
-        <Button variant="outline" size="sm" onClick={() => go(-1)} disabled={index === 0} aria-label="Previous section"><ChevronLeft /> Previous</Button>
-        <div className="hidden items-center gap-1.5 md:flex" aria-label="Slides">
+        <Button variant="outline" size="sm" onClick={() => go(-1)} disabled={index === 0} aria-label={ui.nav.previousSection}><ChevronLeft /> {ui.common.previous}</Button>
+        <div className="hidden items-center gap-1.5 md:flex" aria-label={ui.nav.slides}>
           {sections.map((s, i) => (
             <button
               key={s.id}
               onClick={() => { setDir(i > index ? 1 : -1); goTo(i); }}
-              aria-label={`Go to ${s.title}`}
+              aria-label={`${ui.nav.goTo} ${titleOf(s.id)}`}
               aria-current={i === index ? "true" : undefined}
               className={cn("h-1.5 rounded-full transition-all", i === index ? "w-8 bg-[linear-gradient(90deg,var(--accent-blue),var(--accent-magenta))]" : "w-3 bg-foreground/20 hover:bg-foreground/40")}
             />
           ))}
         </div>
-        <p className="hidden text-[11px] text-muted lg:block">Use ← → to navigate · Esc to exit</p>
-        <Button variant="primary" size="sm" onClick={() => go(1)} disabled={index === total - 1} aria-label="Next section">Next <ChevronRight /></Button>
+        <p className="hidden text-[11px] text-muted lg:block">{ui.nav.keyboardHint}</p>
+        <Button variant="primary" size="sm" onClick={() => go(1)} disabled={index === total - 1} aria-label={ui.nav.nextSection}>{ui.common.next} <ChevronRight /></Button>
       </div>
     </div>
   );

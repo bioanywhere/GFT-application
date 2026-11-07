@@ -3,13 +3,16 @@
 import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 import { ArrowRight, ArrowDown, Sparkles } from "lucide-react";
-import { site } from "@/content";
-import { compareHero, compareRoles } from "@/content/compare";
+import { useContent } from "@/components/layout/locale-provider";
+import { localePath } from "@/content/locale";
 import { scrollToSection } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 
 export function CompareHeroSection() {
+  const { site, ui, compare, locale } = useContent();
+  const compareHero = compare.hero;
+  const compareRoles = compare.roles;
   const reduce = useReducedMotion();
   const fade = (delay: number) => ({ initial: reduce ? false : { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] as const } });
   const roles = [compareRoles.ai, compareRoles.ventures];
@@ -21,7 +24,7 @@ export function CompareHeroSection() {
       <div className="mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12">
         <motion.p {...fade(0)} className="eyebrow mb-6 flex items-center gap-2"><Sparkles className="size-3.5 text-accent-blue" /> {compareHero.eyebrow}</motion.p>
         <motion.h1 {...fade(0.1)} className="display max-w-4xl text-balance text-4xl sm:text-5xl lg:text-6xl xl:text-[4.25rem]">
-          Two Ways to Contribute to <span className="gradient-text">GFT’s AI Future.</span>
+          {ui.cmp.heroHeadlineStart} <span className="gradient-text">{ui.cmp.heroHeadlineAccent}</span>
         </motion.h1>
         <motion.p {...fade(0.25)} className="mt-6 max-w-3xl text-pretty text-base leading-relaxed text-muted sm:text-lg">{compareHero.description}</motion.p>
 
@@ -35,13 +38,13 @@ export function CompareHeroSection() {
               </div>
               <h2 className="mt-5 text-2xl font-semibold tracking-tight">{r.name}</h2>
               <p className="mt-2 text-base font-medium" style={{ color: r.color }}>{r.tagline}</p>
-              <Button variant="outline" size="sm" asChild className="mt-5"><Link href={r.href}>Open the full proposal <ArrowRight /></Link></Button>
+              <Button variant="outline" size="sm" asChild className="mt-5"><Link href={localePath(r.href, locale)}>{ui.cmp.openProposal} <ArrowRight /></Link></Button>
             </div>
           ))}
         </motion.div>
 
         <motion.div {...fade(0.55)} className="mt-10 rounded-3xl card p-6 sm:p-8">
-          <p className="eyebrow mb-5">The value chain both roles serve</p>
+          <p className="eyebrow mb-5">{ui.cmp.valueChain}</p>
           <ol className="flex flex-col gap-2 md:flex-row md:items-center md:gap-0">
             {compareHero.chain.map((step, i) => {
               const owner = i < 2 ? compareRoles.ai : compareRoles.ventures;
@@ -61,9 +64,9 @@ export function CompareHeroSection() {
         </motion.div>
 
         <motion.div {...fade(0.7)} className="mt-8 flex flex-wrap items-center gap-3">
-          <Button variant="gradient" size="lg" onClick={() => scrollToSection("cmp-table")}>Compare Side by Side <ArrowDown /></Button>
-          <Button variant="ghost" size="lg" onClick={() => scrollToSection("cmp-guide")}>Which fits GFT’s priorities?</Button>
-          <span className="ml-auto text-xs text-muted">Prepared for {site.addressedTo.name}, {site.addressedTo.title}, {site.addressedTo.company}</span>
+          <Button variant="gradient" size="lg" onClick={() => scrollToSection("cmp-table")}>{ui.cmp.compareSideBySide} <ArrowDown /></Button>
+          <Button variant="ghost" size="lg" onClick={() => scrollToSection("cmp-guide")}>{ui.cmp.whichFits}</Button>
+          <span className="ml-auto text-xs text-muted">{ui.common.preparedFor} {site.addressedTo.name}, {site.addressedTo.title}, {site.addressedTo.company}</span>
         </motion.div>
       </div>
     </section>

@@ -1,3 +1,5 @@
+import type { ValueDriver } from "./types";
+
 export const impact = {
   headline: "Innovation Is Valuable. Commercial Impact Is Essential.",
   intro:
@@ -17,6 +19,7 @@ export const impact = {
   valueFramework: [
     {
       id: "revenue-growth",
+      driver: "Revenue growth" as ValueDriver,
       title: "Revenue Growth",
       text: "New services, products, customers, and business models.",
       icon: "TrendingUp" as const,
@@ -24,6 +27,7 @@ export const impact = {
     },
     {
       id: "efficiency",
+      driver: "Operational efficiency" as ValueDriver,
       title: "Operational Efficiency",
       text: "Reduced costs and improved process performance.",
       icon: "Workflow" as const,
@@ -31,6 +35,7 @@ export const impact = {
     },
     {
       id: "expansion",
+      driver: "Market expansion" as ValueDriver,
       title: "Market Expansion",
       text: "New industries, customer segments, and geographic markets.",
       icon: "Globe2" as const,
@@ -38,6 +43,7 @@ export const impact = {
     },
     {
       id: "differentiation",
+      driver: "Competitive differentiation" as ValueDriver,
       title: "Competitive Differentiation",
       text: "Proprietary solutions, specialized expertise, and innovative offerings.",
       icon: "Sparkles" as const,
@@ -45,6 +51,7 @@ export const impact = {
     },
     {
       id: "recurring",
+      driver: "Recurring revenue" as ValueDriver,
       title: "Recurring Revenue",
       text: "Subscription platforms, licensed assets, managed services, and ongoing enterprise contracts.",
       icon: "Repeat" as const,

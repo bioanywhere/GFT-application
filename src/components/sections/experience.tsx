@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ChevronDown, ExternalLink, Code2 } from "lucide-react";
-import { experienceSection, experiences } from "@/content";
+import { useContent } from "@/components/layout/locale-provider";
 import { cn } from "@/lib/utils";
 import { Section, SectionHeading } from "@/components/layout/section";
 import { Reveal, Stagger, StaggerItem } from "@/components/layout/reveal";
@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { CountUp } from "@/components/visuals/count-up";
 
 export function ExperienceSection() {
+  const { experienceSection, experiences, ui } = useContent();
   const [openId, setOpenId] = useState<string | null>(experiences[0].id);
   const reduce = useReducedMotion();
   const minYear = 2007;
@@ -19,7 +20,7 @@ export function ExperienceSection() {
   return (
     <Section id="experience" tone="elevated">
       <Reveal>
-        <SectionHeading eyebrow="06 · Proven Experience" title={experienceSection.headline} intro={experienceSection.intro} />
+        <SectionHeading eyebrow={ui.experience.eyebrow} title={experienceSection.headline} intro={experienceSection.intro} />
       </Reveal>
 
       <Stagger className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -114,7 +115,7 @@ export function ExperienceSection() {
                       <div className="space-y-4">
                         {e.technical && (
                           <div>
-                            <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted"><Code2 className="size-3.5" /> Technical detail</p>
+                            <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted"><Code2 className="size-3.5" /> {ui.experience.technicalDetail}</p>
                             <ul className="mt-2 flex flex-wrap gap-1.5">
                               {e.technical.map((t) => (
                                 <li key={t} className="rounded-md border border-border bg-background px-2 py-0.5 font-mono text-[11px]">{t}</li>

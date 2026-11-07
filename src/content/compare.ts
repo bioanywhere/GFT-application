@@ -186,7 +186,9 @@ export const compareClosing = {
   emailSubject: "Head of AI / AI Ventures — GFT Technologies",
 };
 
-export const compareNavigation = [
+export type CompareSectionId = "cmp-hero" | "cmp-table" | "cmp-focus" | "cmp-impact" | "cmp-model" | "cmp-fit" | "cmp-guide" | "cmp-contact";
+
+export const compareNavigation: readonly { id: CompareSectionId; label: string }[] = [
   { id: "cmp-hero", label: "Overview" },
   { id: "cmp-table", label: "Side by Side" },
   { id: "cmp-focus", label: "Strategic Focus" },
@@ -195,4 +197,4 @@ export const compareNavigation = [
   { id: "cmp-fit", label: "My Fit" },
   { id: "cmp-guide", label: "Priority Guide" },
   { id: "cmp-contact", label: "Contact" },
-] as const;
+];

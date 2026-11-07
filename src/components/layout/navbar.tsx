@@ -4,8 +4,9 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { motion } from "motion/react";
 import { FileText, Menu, Presentation } from "lucide-react";
-import { navigation as defaultNavigation, site } from "@/content";
 import type { NavItem } from "@/components/layout/types";
+import { localePath } from "@/content/locale";
+import { useContent } from "@/components/layout/locale-provider";
 import { cn, scrollToSection } from "@/lib/utils";
 import { useActiveSection } from "@/hooks/use-active-section";
 import { useScrollProgress } from "@/hooks/use-scroll-progress";
@@ -14,25 +15,23 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetDescription, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { ThemeToggle } from "./theme-toggle";
 import { ProposalSwitcher } from "./proposal-tabs";
+import { LanguageToggle } from "./language-toggle";
 
 export interface NavbarProps {
-  navigation?: readonly NavItem[];
-  brandSub?: string;
+  navigation: readonly NavItem[];
+  brandSub: string;
   summaryHref?: string | null;
-  homeId?: string;
+  homeId: string;
 }
 
-export function Navbar({
-  navigation = defaultNavigation,
-  brandSub = "AI Ventures Proposal · GFT",
-  summaryHref = "/executive-summary",
-  homeId = "proposal",
-}: NavbarProps) {
+export function Navbar({ navigation, brandSub, summaryHref, homeId }: NavbarProps) {
+  const { site, ui, locale } = useContent();
   const ids = useMemo<string[]>(() => navigation.map((n) => n.id), [navigation]);
   const active = useActiveSection(ids);
   const progress = useScrollProgress();
   const presentation = usePresentation();
   const [open, setOpen] = useState(false);
+  const summary = summaryHref ? localePath(summaryHref, locale) : null;
 
   const go = (id: string) => {
     setOpen(false);
@@ -46,7 +45,7 @@ export function Navbar({
           <button
             onClick={() => go(homeId)}
             className="flex items-center gap-3 text-left focus-visible:outline-2 focus-visible:outline-(--ring) rounded-md"
-            aria-label="Back to top"
+            aria-label={ui.common.backToTop}
           >
             <span className="relative flex size-8 items-center justify-center rounded-lg bg-[linear-gradient(135deg,var(--accent-blue),var(--accent-magenta))] text-xs font-bold text-white">
               AG
@@ -60,28 +59,29 @@ export function Navbar({
           <ProposalSwitcher className="hidden md:flex" />
 
           <div className="flex items-center gap-1.5">
-            {summaryHref && (<>
-            <Button variant="outline" size="sm" asChild className="hidden md:inline-flex">
-              <Link href={summaryHref}>
-                <FileText /> Executive Summary
-              </Link>
-            </Button>
-            </>)}
+            {summary && (
+              <Button variant="outline" size="sm" asChild className="hidden md:inline-flex">
+                <Link href={summary}>
+                  <FileText /> {ui.common.executiveSummary}
+                </Link>
+              </Button>
+            )}
             <Button variant="gradient" size="sm" onClick={() => presentation.open(ids.indexOf(active))} className="hidden sm:inline-flex">
-              <Presentation /> Presentation Mode
+              <Presentation /> {ui.common.presentationMode}
             </Button>
+            <LanguageToggle className="hidden sm:flex" />
             <ThemeToggle />
             <Sheet open={open} onOpenChange={setOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="xl:hidden" aria-label="Open navigation">
+                <Button variant="ghost" size="icon" className="xl:hidden" aria-label={ui.nav.openNavigation}>
                   <Menu />
                 </Button>
               </SheetTrigger>
               <SheetContent>
-                <SheetTitle className="text-sm font-semibold">Navigate the proposal</SheetTitle>
-                <SheetDescription className="text-xs text-muted">Switch proposal or jump to any section.</SheetDescription>
-                <ProposalSwitcher className="mt-4 w-full justify-between md:hidden" layoutId="proposal-tab-pill-sheet" onNavigate={() => setOpen(false)} />
-                <nav className="mt-6 flex flex-col gap-1" aria-label="Sections">
+                <SheetTitle className="text-sm font-semibold">{ui.nav.sheetTitle}</SheetTitle>
+                <SheetDescription className="text-xs text-muted">{ui.nav.sheetDescription}</SheetDescription>
+                <ProposalSwitcher className="mt-4 w-full md:hidden" itemClassName="flex-1 justify-center px-2" layoutId="proposal-tab-pill-sheet" onNavigate={() => setOpen(false)} />
+                <nav className="mt-6 flex flex-col gap-1" aria-label={ui.nav.sectionsLabel}>
                   {navigation.map((item, i) => (
                     <button
                       key={item.id}
@@ -98,13 +98,14 @@ export function Navbar({
                 </nav>
                 <div className="mt-6 flex flex-col gap-2">
                   <Button variant="gradient" onClick={() => { setOpen(false); presentation.open(ids.indexOf(active)); }}>
-                    <Presentation /> Presentation Mode
+                    <Presentation /> {ui.common.presentationMode}
                   </Button>
-                  {summaryHref && (
-                  <Button variant="outline" asChild>
-                    <Link href={summaryHref}><FileText /> Executive Summary</Link>
-                  </Button>
+                  {summary && (
+                    <Button variant="outline" asChild>
+                      <Link href={summary}><FileText /> {ui.common.executiveSummary}</Link>
+                    </Button>
                   )}
+                  <LanguageToggle className="w-full justify-center sm:hidden" />
                 </div>
               </SheetContent>
             </Sheet>

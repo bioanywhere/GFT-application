@@ -1,24 +1,21 @@
 "use client";
 
 import { AlertCircle, Building2, Coins, Gem, Microscope, Puzzle, Target, Users } from "lucide-react";
-import { getIndustry, type Opportunity } from "@/content";
+import type { Opportunity } from "@/content/types";
+import { useContent } from "@/components/layout/locale-provider";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { Icon } from "@/components/ui/icon";
 
-const blocks: { key: keyof Opportunity; title: string; icon: React.ComponentType<{ className?: string }>; number: string }[] = [
-  { key: "problem", title: "Business problem", icon: AlertCircle, number: "01" },
-  { key: "solution", title: "Proposed AI solution", icon: Puzzle, number: "02" },
-  { key: "customers", title: "Potential customer segments", icon: Users, number: "03" },
-  { key: "commercialModels", title: "Revenue model", icon: Coins, number: "04" },
-  { key: "businessValue", title: "Business value", icon: Gem, number: "05" },
-  { key: "capabilities", title: "Technical capabilities required", icon: Building2, number: "06" },
-  { key: "validation", title: "Suggested validation approach", icon: Microscope, number: "07" },
-  { key: "gftRelevance", title: "Strategic relevance to GFT", icon: Target, number: "08" },
-];
+const blockKeys = ["problem", "solution", "customers", "commercialModels", "businessValue", "capabilities", "validation", "gftRelevance"] as const;
+const blockIcons: Record<(typeof blockKeys)[number], React.ComponentType<{ className?: string }>> = {
+  problem: AlertCircle, solution: Puzzle, customers: Users, commercialModels: Coins, businessValue: Gem, capabilities: Building2, validation: Microscope, gftRelevance: Target,
+};
 
 export function OpportunityDialog({ opportunity, onClose }: { opportunity: Opportunity | null; onClose: () => void }) {
-  const ind = opportunity ? getIndustry(opportunity.industryId) : undefined;
+  const { industries, ui } = useContent();
+  const ind = opportunity ? industries.find((i) => i.id === opportunity.industryId) : undefined;
+  const blocks = blockKeys.map((key, i) => ({ key, title: ui.explorer.blocks[key], icon: blockIcons[key], number: String(i + 1).padStart(2, "0") }));
   return (
     <Dialog open={!!opportunity} onOpenChange={(o) => !o && onClose()}>
       <DialogContent className="max-w-4xl p-0">
@@ -29,20 +26,21 @@ export function OpportunityDialog({ opportunity, onClose }: { opportunity: Oppor
               <div className="relative">
                 <div className="flex flex-wrap items-center gap-2">
                   <Badge variant={ind.accent}><Icon name={ind.icon} className="size-3" /> {ind.name}</Badge>
-                  <Badge variant="outline">Hypothesis · for validation</Badge>
+                  <Badge variant="outline">{ui.explorer.hypothesisBadge}</Badge>
                 </div>
                 <DialogTitle className="mt-4 pr-10 text-2xl sm:text-3xl">{opportunity.name}</DialogTitle>
                 <DialogDescription className="mt-2 max-w-2xl text-base">{opportunity.tagline}</DialogDescription>
                 <div className="mt-4 flex flex-wrap gap-1.5">
                   {opportunity.valueDrivers.map((d) => (
-                    <span key={d} className="rounded-full bg-foreground/5 px-2.5 py-1 text-[11px] font-medium">{d}</span>
+                    <span key={d} className="rounded-full bg-foreground/5 px-2.5 py-1 text-[11px] font-medium">{ui.explorer.driverLabels[d]}</span>
                   ))}
                 </div>
               </div>
             </div>
             <div className="grid gap-x-8 gap-y-6 p-6 sm:grid-cols-2 sm:p-8">
               {blocks.map((b) => {
-                const value = opportunity[b.key];
+                const raw = opportunity[b.key];
+                const value = b.key === "commercialModels" && Array.isArray(raw) ? raw.map((m) => ui.explorer.modelLabels[m as keyof typeof ui.explorer.modelLabels] ?? m) : raw;
                 return (
                   <div key={b.key} className={b.key === "gftRelevance" || b.key === "solution" ? "sm:col-span-2" : ""}>
                     <p className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted">
@@ -62,7 +60,7 @@ export function OpportunityDialog({ opportunity, onClose }: { opportunity: Oppor
               })}
             </div>
             <p className="border-t border-border px-6 py-4 text-[11px] leading-relaxed text-muted sm:px-8">
-              Presented as a proposal and hypothesis. It does not describe an existing GFT product, confirmed customer demand, or a guaranteed outcome.
+              {ui.explorer.dialogFooter}
             </p>
           </div>
         )}

@@ -2,16 +2,17 @@
 
 import { useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { profile } from "@/content";
+import { useContent } from "@/components/layout/locale-provider";
 import { cn } from "@/lib/utils";
 
 export function CapabilityConstellation() {
+  const { profile, ui } = useContent();
   const reduce = useReducedMotion();
   const [activeGroup, setActiveGroup] = useState<string | null>(null);
   return (
     <div>
-      <div className="flex flex-wrap gap-2" role="group" aria-label="Highlight capability group">
-        <button onClick={() => setActiveGroup(null)} aria-pressed={activeGroup === null} className={cn("rounded-full border px-3 py-1.5 text-xs font-medium transition", activeGroup === null ? "border-foreground bg-foreground text-background" : "border-border hover:border-border-strong")}>All</button>
+      <div className="flex flex-wrap gap-2" role="group" aria-label={ui.whyAndres.highlightGroup}>
+        <button onClick={() => setActiveGroup(null)} aria-pressed={activeGroup === null} className={cn("rounded-full border px-3 py-1.5 text-xs font-medium transition", activeGroup === null ? "border-foreground bg-foreground text-background" : "border-border hover:border-border-strong")}>{ui.common.all}</button>
         {profile.capabilityGroups.map((g) => (
           <button
             key={g.id}

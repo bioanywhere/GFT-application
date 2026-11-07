@@ -1,4 +1,22 @@
-export const site = {
+export interface SiteContent {
+  name: string;
+  shortName: string;
+  url: string;
+  description: string;
+  tagline: string;
+  disclaimer: string;
+  addressedTo: { name: string; title: string; company: string };
+  candidate: {
+    name: string; headline: string; experienceLine: string; footerLine: string; email: string; linkedin: string;
+    cvPath: string; cvFileName: string; photo: string | null; location: string; languages: string; availability: string; openTo: string;
+  };
+  positions: string[];
+  primaryPosition: string;
+  emailSubject: string;
+  emailBody: string;
+}
+
+export const site: SiteContent = {
   name: "AI Ventures Proposal · Andrés García Montoya",
   shortName: "AI Ventures Proposal",
   url: "https://gft-ai-ventures.vercel.app",
@@ -21,7 +39,7 @@ export const site = {
     linkedin: "https://www.linkedin.com/in/andresgarciamontoya/",
     cvPath: "/documents/Andres-Garcia-Montoya-CV.pdf",
     cvFileName: "Andres-Garcia-Montoya-CV.pdf",
-    photo: null as string | null,
+    photo: null,
     location: "Based in Colombia",
     languages: "English & Spanish",
     availability: "Available Immediately",
@@ -36,14 +54,16 @@ export const site = {
   emailSubject: "AI Ventures & Business Innovation — GFT Technologies",
   emailBody:
     "Hi Andrés,\n\nI reviewed your AI Ventures & Business Innovation proposal for GFT Technologies and would like to schedule a conversation.\n\n",
-} as const;
+};
 
 export function mailtoLink(subject: string = site.emailSubject, body: string = site.emailBody) {
   const params = new URLSearchParams({ subject, body });
   return `mailto:${site.candidate.email}?${params.toString().replace(/\+/g, "%20")}`;
 }
 
-export const navigation = [
+export type SectionId = "proposal" | "why-gft" | "engine" | "opportunities" | "why-andres" | "experience" | "impact" | "roadmap" | "fit" | "availability" | "contact";
+
+export const navigation: readonly { id: SectionId; label: string }[] = [
   { id: "proposal", label: "Proposal" },
   { id: "why-gft", label: "Why GFT" },
   { id: "engine", label: "Framework" },
@@ -55,6 +75,4 @@ export const navigation = [
   { id: "fit", label: "Strategic Fit" },
   { id: "availability", label: "Availability" },
   { id: "contact", label: "Contact" },
-] as const;
-
-export type SectionId = (typeof navigation)[number]["id"];
+]; 

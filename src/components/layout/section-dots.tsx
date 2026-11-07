@@ -1,24 +1,25 @@
 "use client";
 
 import { useMemo } from "react";
-import { navigation as defaultNavigation } from "@/content";
 import type { NavItem } from "@/components/layout/types";
+import { useContent } from "@/components/layout/locale-provider";
 import { cn, scrollToSection } from "@/lib/utils";
 import { useActiveSection } from "@/hooks/use-active-section";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
-export function SectionDots({ navigation = defaultNavigation }: { navigation?: readonly NavItem[] }) {
+export function SectionDots({ navigation }: { navigation: readonly NavItem[] }) {
+  const { ui } = useContent();
   const ids = useMemo<string[]>(() => navigation.map((n) => n.id), [navigation]);
   const active = useActiveSection(ids);
   return (
     <TooltipProvider delayDuration={100}>
-      <nav aria-label="Section progress" className="no-print fixed right-5 top-1/2 z-[60] hidden -translate-y-1/2 flex-col items-center gap-2.5 lg:flex">
+      <nav aria-label={ui.nav.sectionProgress} className="no-print fixed right-5 top-1/2 z-[60] hidden -translate-y-1/2 flex-col items-center gap-2.5 lg:flex">
         {navigation.map((item) => (
           <Tooltip key={item.id}>
             <TooltipTrigger asChild>
               <button
                 onClick={() => scrollToSection(item.id)}
-                aria-label={`Go to ${item.label}`}
+                aria-label={`${ui.nav.goTo} ${item.label}`}
                 aria-current={active === item.id ? "true" : undefined}
                 className="group flex size-4 items-center justify-center rounded-full focus-visible:outline-2 focus-visible:outline-(--ring)"
               >

@@ -2,16 +2,18 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import { ChevronRight } from "lucide-react";
-import { aiStandards } from "@/content/head-of-ai";
+import { useContent } from "@/components/layout/locale-provider";
 import { Section, SectionHeading } from "@/components/layout/section";
 import { Reveal, Stagger, StaggerItem } from "@/components/layout/reveal";
 import { Icon } from "@/components/ui/icon";
 
 export function AiStandardsSection() {
+  const { ai, ui } = useContent();
+  const aiStandards = ai.standards;
   const reduce = useReducedMotion();
   return (
     <Section id="ai-standards">
-      <Reveal><SectionHeading eyebrow="07 · Engineering Standards & Responsible AI" title={aiStandards.headline} intro={aiStandards.intro} /></Reveal>
+      <Reveal><SectionHeading eyebrow={ui.ai.standardsEyebrow} title={aiStandards.headline} intro={aiStandards.intro} /></Reveal>
       <Stagger className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {aiStandards.pillars.map((p) => (
           <StaggerItem key={p.id} className="group rounded-3xl card p-6 transition hover:border-border-strong">
@@ -25,7 +27,7 @@ export function AiStandardsSection() {
         ))}
       </Stagger>
       <Reveal className="mt-8 rounded-3xl card p-6 sm:p-8">
-        <p className="eyebrow mb-5">AI governance flow · every solution, every release</p>
+        <p className="eyebrow mb-5">{ui.ai.governanceFlow}</p>
         <ol className="grid gap-2 md:grid-cols-6">
           {aiStandards.governanceFlow.map((g, i) => (
             <motion.li key={g} initial={reduce ? false : { opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }} className="relative rounded-2xl border border-border bg-background-elevated/70 p-4">

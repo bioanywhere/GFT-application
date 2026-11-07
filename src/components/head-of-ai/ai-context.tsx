@@ -1,20 +1,21 @@
 "use client";
 
 import { CheckCircle2, ExternalLink, GitBranch, ShieldCheck } from "lucide-react";
-import { whyGft } from "@/content";
-import { aiContext } from "@/content/head-of-ai";
+import { useContent } from "@/components/layout/locale-provider";
 import { Section, SectionHeading } from "@/components/layout/section";
 import { Reveal, Stagger, StaggerItem } from "@/components/layout/reveal";
 import { Badge } from "@/components/ui/badge";
 import { Icon } from "@/components/ui/icon";
 
 export function AiContextSection() {
+  const { whyGft, ai, ui } = useContent();
+  const aiContext = ai.context;
   return (
     <Section id="ai-context" tone="elevated">
-      <Reveal><SectionHeading eyebrow="02 · Why Now" title={aiContext.headline} intro={aiContext.intro} /></Reveal>
+      <Reveal><SectionHeading eyebrow={ui.ai.contextEyebrow} title={aiContext.headline} intro={aiContext.intro} /></Reveal>
 
       <Reveal delay={0.1} className="mt-12 gradient-border rounded-3xl card p-6 sm:p-10">
-        <p className="eyebrow mb-3">Core message</p>
+        <p className="eyebrow mb-3">{ui.whyGft.coreMessage}</p>
         <p className="display text-balance text-xl sm:text-2xl lg:text-3xl !leading-snug !font-medium">“{aiContext.coreMessage}”</p>
       </Reveal>
 
@@ -62,7 +63,7 @@ export function AiContextSection() {
       </div>
 
       <Reveal className="mt-10 rounded-2xl border border-border p-5 text-xs text-muted">
-        <p className="mb-2 font-semibold uppercase tracking-[0.16em]">Sources · official GFT publications</p>
+        <p className="mb-2 font-semibold uppercase tracking-[0.16em]">{ui.whyGft.sources}</p>
         <ul className="grid gap-1.5 sm:grid-cols-2">
           {whyGft.sources.map((s) => (
             <li key={s.url}>

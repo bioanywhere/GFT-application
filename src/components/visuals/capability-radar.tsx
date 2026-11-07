@@ -1,11 +1,12 @@
 "use client";
 
 import { PolarAngleAxis, PolarGrid, PolarRadiusAxis, Radar, RadarChart, ResponsiveContainer, Tooltip } from "recharts";
-import { profile } from "@/content";
+import { useContent } from "@/components/layout/locale-provider";
 
 export function CapabilityRadar() {
+  const { profile, ui } = useContent();
   return (
-    <div className="h-[320px] w-full sm:h-[380px]" role="img" aria-label="Radar chart of capability emphasis across AI and technology, entrepreneurship, business development, product innovation, cross-industry experience and team leadership">
+    <div className="h-[320px] w-full sm:h-[380px]" role="img" aria-label={ui.whyAndres.radarAria}>
       <ResponsiveContainer width="100%" height="100%">
         <RadarChart data={profile.radar} outerRadius="72%" margin={{ top: 10, right: 30, bottom: 10, left: 30 }}>
           <defs>
@@ -20,7 +21,7 @@ export function CapabilityRadar() {
           <Tooltip
             cursor={false}
             contentStyle={{ background: "var(--card-solid)", border: "1px solid var(--border)", borderRadius: 12, fontSize: 12, color: "var(--foreground)" }}
-            formatter={(v) => [`${v} / 100`, "Emphasis"]}
+            formatter={(v) => [`${v} / 100`, ui.whyAndres.emphasis]}
           />
           <Radar dataKey="value" stroke="var(--accent-blue)" strokeWidth={2} fill="url(#radar-fill)" isAnimationActive />
         </RadarChart>

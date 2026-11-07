@@ -1,9 +1,10 @@
-import { compareRoles } from "@/content/compare";
+import { useContent } from "@/components/layout/locale-provider";
 import { Icon } from "@/components/ui/icon";
 import { cn } from "@/lib/utils";
 
 export function RoleChip({ role, className, short = true }: { role: "ai" | "ventures"; className?: string; short?: boolean }) {
-  const r = compareRoles[role];
+  const { compare } = useContent();
+  const r = compare.roles[role];
   return (
     <span className={cn("inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold text-white", className)} style={{ background: `linear-gradient(100deg, ${r.color}, ${r.color2})` }}>
       <Icon name={r.icon} className="size-3" /> {short ? r.short : r.name}

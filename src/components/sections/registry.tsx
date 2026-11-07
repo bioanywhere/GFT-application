@@ -1,5 +1,6 @@
 import type { ComponentType } from "react";
-import { navigation } from "@/content";
+import type { SectionEntry } from "@/components/layout/types";
+import { navigation } from "@/content/site";
 import { HeroSection } from "./hero";
 import { WhyGftSection } from "./why-gft";
 import { OpportunityEngineSection } from "./opportunity-engine";
@@ -26,4 +27,4 @@ const components: Record<(typeof navigation)[number]["id"], ComponentType> = {
   contact: ClosingSection,
 };
 
-export const sections = navigation.map((n) => ({ id: n.id, title: n.label, Component: components[n.id] }));
+export const sections: SectionEntry[] = navigation.map((n) => ({ id: n.id, title: n.label, Component: components[n.id] }));

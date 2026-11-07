@@ -2,13 +2,16 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import { ArrowDown, ArrowRight, Calendar, Globe2, Languages, Sparkles } from "lucide-react";
-import { hero, mailtoLink, site } from "@/content";
+import { useContent } from "@/components/layout/locale-provider";
+import { mailto } from "@/content/dictionary";
 import { scrollToSection } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { HeroNetwork } from "@/components/visuals/hero-network";
 
 export function HeroSection() {
+  const d = useContent();
+  const { hero, site, ui } = d;
   const reduce = useReducedMotion();
   const fade = (delay: number) => ({
     initial: reduce ? false : { opacity: 0, y: 20 },
@@ -28,7 +31,7 @@ export function HeroSection() {
             <Sparkles className="size-3.5 text-accent-blue" /> {hero.eyebrow}
           </motion.p>
           <motion.h1 {...fade(0.1)} className="display text-balance text-4xl sm:text-5xl lg:text-6xl xl:text-[4.25rem]">
-            Turning Artificial Intelligence Into <span className="gradient-text">New Business Opportunities.</span>
+            {ui.hero.headlineStart} <span className="gradient-text">{ui.hero.headlineAccent}</span>
           </motion.h1>
           <motion.p {...fade(0.2)} className="mt-6 text-lg font-medium text-foreground sm:text-xl">
             {hero.supporting}
@@ -39,18 +42,18 @@ export function HeroSection() {
 
           <motion.div {...fade(0.4)} className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <Button variant="gradient" size="lg" onClick={() => scrollToSection("why-gft")}>
-              Explore My Proposal <ArrowDown />
+              {hero.primaryCtas[0].label} <ArrowDown />
             </Button>
             <Button variant="outline" size="lg" onClick={() => scrollToSection("opportunities")}>
-              Discover AI Opportunities <ArrowRight />
+              {hero.primaryCtas[1].label} <ArrowRight />
             </Button>
           </motion.div>
           <motion.div {...fade(0.5)} className="mt-3 flex flex-wrap gap-x-6 gap-y-2">
             <button onClick={() => scrollToSection("experience")} className="text-sm font-medium text-muted underline-offset-4 transition hover:text-foreground hover:underline">
-              View My Experience
+              {hero.secondaryCtas[0].label}
             </button>
-            <a href={mailtoLink()} className="text-sm font-medium text-muted underline-offset-4 transition hover:text-foreground hover:underline">
-              Schedule a Conversation
+            <a href={mailto(d)} className="text-sm font-medium text-muted underline-offset-4 transition hover:text-foreground hover:underline">
+              {hero.secondaryCtas[1].label}
             </a>
           </motion.div>
 
@@ -80,12 +83,12 @@ export function HeroSection() {
           className="relative"
         >
           <HeroNetwork />
-          <p className="mt-2 text-center text-xs text-muted">Opportunities emerge where AI meets industries.</p>
+          <p className="mt-2 text-center text-xs text-muted">{ui.hero.networkCaption}</p>
         </motion.div>
       </div>
 
       <motion.div {...fade(0.8)} className="mx-auto mt-12 flex w-full max-w-7xl items-center gap-2 px-5 text-xs text-muted sm:px-8 lg:px-12">
-        <Calendar className="size-3.5 shrink-0" /> <span>Prepared for {site.addressedTo.name}, {site.addressedTo.title}, {site.addressedTo.company}</span>
+        <Calendar className="size-3.5 shrink-0" /> <span>{ui.common.preparedFor} {site.addressedTo.name}, {site.addressedTo.title}, {site.addressedTo.company}</span>
       </motion.div>
     </section>
   );

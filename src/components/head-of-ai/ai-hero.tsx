@@ -2,14 +2,18 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import { ArrowDown, ArrowRight, Calendar, Globe2, Languages, Sparkles } from "lucide-react";
-import { mailtoLink, site } from "@/content";
-import { aiClosing, aiHero } from "@/content/head-of-ai";
+import { useContent } from "@/components/layout/locale-provider";
+import { mailto } from "@/content/dictionary";
 import { scrollToSection } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { AiStack } from "@/components/visuals/ai-stack";
 
 export function AiHeroSection() {
+  const d = useContent();
+  const { site, ui, ai } = d;
+  const aiHero = ai.hero;
+  const aiClosing = ai.closing;
   const reduce = useReducedMotion();
   const fade = (delay: number) => ({
     initial: reduce ? false : { opacity: 0, y: 20 },
@@ -34,13 +38,13 @@ export function AiHeroSection() {
           <motion.p {...fade(0.3)} className="mt-4 max-w-2xl text-pretty text-base leading-relaxed text-muted sm:text-lg">{aiHero.description}</motion.p>
 
           <motion.div {...fade(0.4)} className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            <Button variant="gradient" size="lg" onClick={() => scrollToSection("ai-context")}>Explore the Proposal <ArrowDown /></Button>
-            <Button variant="outline" size="lg" onClick={() => scrollToSection("ai-usecases")}>See AI Use Cases <ArrowRight /></Button>
+            <Button variant="gradient" size="lg" onClick={() => scrollToSection("ai-context")}>{ui.ai.exploreProposal} <ArrowDown /></Button>
+            <Button variant="outline" size="lg" onClick={() => scrollToSection("ai-usecases")}>{ui.ai.seeUseCases} <ArrowRight /></Button>
           </motion.div>
           <motion.div {...fade(0.5)} className="mt-3 flex flex-wrap gap-x-6 gap-y-2">
-            <button onClick={() => scrollToSection("ai-why-andres")} className="text-sm font-medium text-muted underline-offset-4 transition hover:text-foreground hover:underline">Why Andrés</button>
-            <button onClick={() => scrollToSection("ai-roadmap")} className="text-sm font-medium text-muted underline-offset-4 transition hover:text-foreground hover:underline">First 90 Days</button>
-            <a href={mailtoLink(aiClosing.emailSubject)} className="text-sm font-medium text-muted underline-offset-4 transition hover:text-foreground hover:underline">Schedule a Conversation</a>
+            <button onClick={() => scrollToSection("ai-why-andres")} className="text-sm font-medium text-muted underline-offset-4 transition hover:text-foreground hover:underline">{ui.ai.whyAndres}</button>
+            <button onClick={() => scrollToSection("ai-roadmap")} className="text-sm font-medium text-muted underline-offset-4 transition hover:text-foreground hover:underline">{ui.ai.first90}</button>
+            <a href={mailto(d, aiClosing.emailSubject)} className="text-sm font-medium text-muted underline-offset-4 transition hover:text-foreground hover:underline">{ui.common.scheduleConversation}</a>
           </motion.div>
 
           <motion.div {...fade(0.6)} className="mt-10 card rounded-2xl p-5 sm:p-6">
@@ -63,11 +67,11 @@ export function AiHeroSection() {
 
         <motion.div initial={reduce ? false : { opacity: 0, scale: 0.94 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}>
           <AiStack />
-          <p className="mt-2 text-center text-xs text-muted">The AI operating stack this role would own and run.</p>
+          <p className="mt-2 text-center text-xs text-muted">{ui.ai.stackCaption}</p>
         </motion.div>
       </div>
       <motion.div {...fade(0.8)} className="mx-auto mt-12 flex w-full max-w-7xl items-center gap-2 px-5 text-xs text-muted sm:px-8 lg:px-12">
-        <Calendar className="size-3.5 shrink-0" /> <span>Prepared for {site.addressedTo.name}, {site.addressedTo.title}, {site.addressedTo.company}</span>
+        <Calendar className="size-3.5 shrink-0" /> <span>{ui.common.preparedFor} {site.addressedTo.name}, {site.addressedTo.title}, {site.addressedTo.company}</span>
       </motion.div>
     </section>
   );

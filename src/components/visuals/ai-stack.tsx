@@ -1,15 +1,16 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
-import { aiHero } from "@/content/head-of-ai";
+import { useContent } from "@/components/layout/locale-provider";
 
 export function AiStack() {
+  const { ai, ui } = useContent();
   const reduce = useReducedMotion();
-  const layers = aiHero.stack;
+  const layers = ai.hero.stack;
   return (
     <div className="relative mx-auto w-full max-w-[520px]">
       <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_center,var(--glow),transparent_60%)] blur-2xl" aria-hidden />
-      <svg viewBox="0 0 420 420" className="relative h-auto w-full" role="img" aria-label="AI operating stack: strategy, platforms and assets, AI engineering, enterprise adoption, governance, measurable impact">
+      <svg viewBox="0 0 420 420" className="relative h-auto w-full" role="img" aria-label={ui.ai.stackAria}>
         <defs>
           <linearGradient id="st-grad" x1="0" x2="1" y1="0" y2="0">
             <stop offset="0%" stopColor="var(--accent-blue)" />
@@ -49,7 +50,7 @@ export function AiStack() {
             </motion.g>
           );
         })}
-        <text x="236" y="412" textAnchor="middle" fontSize="9" letterSpacing="2" fill="var(--muted)">STRATEGY → PRODUCTION → IMPACT</text>
+        <text x="236" y="412" textAnchor="middle" fontSize="9" letterSpacing="2" fill="var(--muted)">{ui.ai.stackFooter}</text>
       </svg>
     </div>
   );

@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { CheckCircle2, Package } from "lucide-react";
-import { roadmap as defaultRoadmap, type RoadmapData } from "@/content";
+import type { RoadmapData } from "@/content/roadmap";
+import { useContent } from "@/components/layout/locale-provider";
 import { cn } from "@/lib/utils";
 import { Section, SectionHeading } from "@/components/layout/section";
 import { Reveal } from "@/components/layout/reveal";
@@ -15,8 +16,11 @@ export interface RoadmapViewProps {
   tone?: "default" | "elevated";
 }
 
-export function RoadmapSection({ id = "roadmap", eyebrow = "08 · First 90 Days at GFT", data = defaultRoadmap, tone = "elevated" }: RoadmapViewProps) {
-  const roadmap = data;
+export function RoadmapSection({ id = "roadmap", eyebrow, data, tone = "elevated" }: RoadmapViewProps) {
+  const d = useContent();
+  const { ui } = d;
+  const roadmap = data ?? d.roadmap;
+  const eyebrowText = eyebrow ?? ui.roadmap.eyebrow;
   const [active, setActive] = useState(0);
   const reduce = useReducedMotion();
   const phase = roadmap.phases[active];
@@ -24,7 +28,7 @@ export function RoadmapSection({ id = "roadmap", eyebrow = "08 · First 90 Days 
   return (
     <Section id={id} tone={tone}>
       <Reveal>
-        <SectionHeading eyebrow={eyebrow} title={roadmap.headline} intro={roadmap.intro} />
+        <SectionHeading eyebrow={eyebrowText} title={roadmap.headline} intro={roadmap.intro} />
       </Reveal>
 
       <Reveal delay={0.1} className="mt-12">
@@ -51,7 +55,7 @@ export function RoadmapSection({ id = "roadmap", eyebrow = "08 · First 90 Days 
           </div>
         </div>
         <div className="mt-3 flex justify-between px-2 font-mono text-[10px] text-muted" aria-hidden>
-          <span>Day 1</span><span>Day 30</span><span>Day 60</span><span>Day 90</span>
+          {ui.roadmap.dayMarkers.map((m) => <span key={m}>{m}</span>)}
         </div>
       </Reveal>
 
@@ -66,11 +70,11 @@ export function RoadmapSection({ id = "roadmap", eyebrow = "08 · First 90 Days 
             className="grid gap-6 rounded-3xl card p-6 sm:p-8 lg:grid-cols-[1fr_1.3fr]"
           >
             <div>
-              <p className="eyebrow">Phase 0{active + 1} · {phase.range}</p>
+              <p className="eyebrow">{ui.roadmap.phase} 0{active + 1} · {phase.range}</p>
               <h3 className="display mt-2 text-3xl sm:text-4xl">{phase.title}</h3>
               <p className="mt-3 text-base text-muted-strong">{phase.focus}</p>
               <div className="mt-6 gradient-border rounded-2xl bg-background-elevated p-5">
-                <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted"><Package className="size-3.5" /> Deliverable</p>
+                <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted"><Package className="size-3.5" /> {ui.roadmap.deliverable}</p>
                 <p className="mt-2 text-lg font-semibold tracking-tight">{phase.deliverable}</p>
               </div>
             </div>

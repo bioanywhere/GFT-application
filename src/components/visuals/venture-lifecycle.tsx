@@ -1,15 +1,17 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
-import { engine } from "@/content";
+import { useContent } from "@/components/layout/locale-provider";
 
 export function VentureLifecycle() {
+  const { engine, ui } = useContent();
   const reduce = useReducedMotion();
   const steps = engine.lifecycle;
+  const sub = ui.engine.lifecycleStages;
   const n = steps.length;
   return (
     <div className="relative overflow-hidden rounded-3xl card p-6 sm:p-10">
-      <svg viewBox="0 0 1000 170" className="hidden w-full md:block" role="img" aria-label={`Lifecycle: ${steps.join(" to ")}`}>
+      <svg viewBox="0 0 1000 170" className="hidden w-full md:block" role="img" aria-label={`${ui.engine.lifecycleAria}: ${steps.join(" → ")}`}>
         <defs>
           <linearGradient id="vl-grad" x1="0" x2="1">
             <stop offset="0%" stopColor="var(--accent-blue)" />
@@ -58,7 +60,7 @@ export function VentureLifecycle() {
               />
               <text x={x} y={74} textAnchor="middle" fontSize="11" fontWeight="700" fill="var(--foreground)">{i + 1}</text>
               <text x={x} y={40} textAnchor="middle" fontSize="15" fontWeight="600" fill="var(--foreground)" letterSpacing="-0.2">{s}</text>
-              <text x={x} y={140} textAnchor="middle" fontSize="10" fill="var(--muted)" letterSpacing="1.5">{["PIPELINE", "EVIDENCE", "PILOT", "FIRST REVENUE", "PORTFOLIO"][i]}</text>
+              <text x={x} y={140} textAnchor="middle" fontSize="10" fill="var(--muted)" letterSpacing="1.5">{sub[i]}</text>
             </g>
           );
         })}
@@ -68,7 +70,7 @@ export function VentureLifecycle() {
           <li key={s} className="flex items-center gap-3">
             <span className="flex size-8 shrink-0 items-center justify-center rounded-full border border-accent-violet/60 text-xs font-bold">{i + 1}</span>
             <span className="font-medium">{s}</span>
-            <span className="ml-auto font-mono text-[10px] text-muted">{["PIPELINE", "EVIDENCE", "PILOT", "FIRST REVENUE", "PORTFOLIO"][i]}</span>
+            <span className="ml-auto font-mono text-[10px] text-muted">{sub[i]}</span>
           </li>
         ))}
       </ol>
