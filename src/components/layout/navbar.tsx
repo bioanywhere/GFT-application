@@ -50,41 +50,18 @@ export function Navbar({
             <span className="relative flex size-8 items-center justify-center rounded-lg bg-[linear-gradient(135deg,var(--accent-blue),var(--accent-magenta))] text-xs font-bold text-white">
               AG
             </span>
-            <span className="hidden flex-col leading-tight md:flex xl:hidden 2xl:flex">
+            <span className="hidden flex-col leading-tight md:flex">
               <span className="whitespace-nowrap text-sm font-semibold">{site.candidate.name}</span>
               <span className="whitespace-nowrap text-[10px] uppercase tracking-[0.18em] text-muted">{brandSub}</span>
             </span>
           </button>
 
-          <nav aria-label="Sections" className="hidden items-center gap-0 xl:flex 2xl:gap-0.5">
-            {navigation.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => go(item.id)}
-                className={cn(
-                  "relative whitespace-nowrap rounded-full px-2.5 py-1.5 text-[12px] font-medium text-muted transition hover:text-foreground focus-visible:outline-2 focus-visible:outline-(--ring) 2xl:px-3 2xl:text-[12.5px]",
-                  active === item.id && "text-foreground",
-                )}
-                aria-current={active === item.id ? "true" : undefined}
-              >
-                {active === item.id && (
-                  <motion.span layoutId="nav-pill" className="absolute inset-0 rounded-full bg-foreground/8" transition={{ type: "spring", stiffness: 400, damping: 32 }} />
-                )}
-                <span className="relative">{item.label}</span>
-              </button>
-            ))}
-          </nav>
 
           <div className="flex items-center gap-1.5">
             {summaryHref && (<>
-            <Button variant="outline" size="sm" asChild className="hidden md:inline-flex xl:hidden 2xl:inline-flex">
+            <Button variant="outline" size="sm" asChild className="hidden md:inline-flex">
               <Link href={summaryHref}>
                 <FileText /> Executive Summary
-              </Link>
-            </Button>
-            <Button variant="outline" size="icon" asChild className="hidden xl:inline-flex 2xl:hidden" aria-label="Executive Summary">
-              <Link href={summaryHref} title="Executive Summary">
-                <FileText />
               </Link>
             </Button>
             </>)}
