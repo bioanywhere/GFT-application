@@ -1,8 +1,14 @@
-# AI Ventures & Business Innovation — Executive Proposal for GFT Technologies
+# Executive Proposals for GFT Technologies — Andrés García Montoya
 
-An independent, interactive executive proposal by **Andrés García Montoya** for the role of
-**Head of AI Ventures & Business Innovation** at GFT Technologies, addressed to Rohan Malik,
-COO Andean Region.
+An independent, interactive executive proposal site by **Andrés García Montoya**, addressed to
+Rohan Malik, COO Andean Region, GFT Technologies. It presents two distinct leadership
+contributions and a comparison between them:
+
+| Tab | Route | Orientation |
+| --- | --- | --- |
+| Head of AI Ventures & Business Innovation | `/` | Growth: identify, build, and commercialize new AI businesses |
+| Head of AI | `/head-of-ai` | Execution: AI strategy, engineering, adoption, governance, scale |
+| Compare Both | `/compare` | Side-by-side comparison, focus visualization, impact explorer, priority guide |
 
 > From Artificial Intelligence to Business Opportunities. From Opportunities to Revenue.
 
@@ -42,6 +48,14 @@ configuration objects. Components only render what they are given.
 
 | File | What it controls |
 | --- | --- |
+| `proposals.ts` | The three top-level tabs (labels, routes) |
+| `head-of-ai.ts` | Everything on the Head of AI proposal: hero, mandate, delivery model, 16 use cases, profile, standards, impact, 90 days, operating model |
+| `compare.ts` | Everything on the comparison page: dimensions table, qualitative focus levels, industry impact, complementary model, fit, priority guide |
+
+Head of AI Ventures proposal content:
+
+| File | What it controls |
+| --- | --- |
 | `site.ts` | Candidate identity, contact, email subject, navigation, disclaimer |
 | `hero.ts` | Hero headline, description, CTAs, hero network nodes |
 | `why-gft.ts` | Verified GFT facts, proposed opportunities, pillars, source links |
@@ -66,7 +80,9 @@ configuration objects. Components only render what they are given.
 
 - Sticky navigation with scroll progress and section indicator
 - **Presentation Mode**: fullscreen slides, arrow-key navigation, Esc to exit
-- **Executive Summary** at `/executive-summary`: one-page, print-friendly, exportable to PDF
+- **Executive Summary** at `/executive-summary` and `/head-of-ai/executive-summary`: one-page, print-friendly, exportable to PDF
+- Proposal tab bar on every page; each proposal has its own section navigation, progress indicator and presentation mode
+- Head of AI uses an execution palette (blue → cyan → emerald) via the `theme-ai` class; AI Ventures keeps blue → violet → magenta
 - Interactive AI Business Opportunity Engine (clickable stages)
 - AI Opportunity Explorer with industry selector, filters by business value and commercial model, and detail dialogs
 - Editable, clearly labelled hypothetical pipeline scenario (no financial projections)

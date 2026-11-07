@@ -1,6 +1,13 @@
 import type { RoadmapPhase } from "./types";
 
-export const roadmap = {
+export interface RoadmapData {
+  headline: string;
+  intro: string;
+  caveat: string;
+  phases: RoadmapPhase[];
+}
+
+export const roadmap: RoadmapData = {
   headline: "A Practical Plan to Start Creating Value.",
   intro:
     "Ninety days is enough to understand GFT's AI landscape, build a prioritized opportunity portfolio, validate the strongest cases with real customers, and put the first commercial initiatives in motion.",
@@ -51,5 +58,5 @@ export const roadmap = {
       ],
       deliverable: "AI Ventures Commercial Activation Plan",
     },
-  ] satisfies RoadmapPhase[],
+  ],
 };

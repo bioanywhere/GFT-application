@@ -26,7 +26,7 @@ function Block({ number, title, children }: { number: string; title: string; chi
 export default function ExecutiveSummaryPage() {
   return (
     <div className="min-h-dvh bg-background print:bg-white">
-      <header className="no-print sticky top-0 z-50 glass">
+      <header className="no-print sticky top-10 z-50 glass">
         <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-5">
           <Button variant="ghost" size="sm" asChild><Link href="/"><ArrowLeft /> Back to proposal</Link></Button>
           <div className="flex items-center gap-2">

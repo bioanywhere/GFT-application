@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { sections } from "@/components/sections/registry";
+import { sections as defaultSections } from "@/components/sections/registry";
+import { navigation as defaultNavigation } from "@/content";
+import type { NavItem, SectionEntry } from "@/components/layout/types";
 import { PresentationProvider, usePresentation } from "@/components/interactive/presentation-context";
 import { PresentationMode } from "@/components/interactive/presentation-mode";
 import { Navbar } from "./navbar";
@@ -9,7 +11,15 @@ import { SectionDots } from "./section-dots";
 import { Footer } from "./footer";
 import { scrollToSection } from "@/lib/utils";
 
-function Body() {
+interface ShellProps {
+  sections?: readonly SectionEntry[];
+  navigation?: readonly NavItem[];
+  brandSub?: string;
+  summaryHref?: string | null;
+  className?: string;
+}
+
+function Body({ sections = defaultSections, navigation = defaultNavigation, brandSub, summaryHref, className }: ShellProps) {
   const { active, index } = usePresentation();
   const wasActive = useRef(false);
 
@@ -19,16 +29,16 @@ function Body() {
       requestAnimationFrame(() => scrollToSection(sections[index].id));
     }
     wasActive.current = active;
-  }, [active, index]);
+  }, [active, index, sections]);
 
   return (
-    <>
+    <div className={className}>
       {active ? (
-        <PresentationMode />
+        <PresentationMode sections={sections} />
       ) : (
         <>
-          <Navbar />
-          <SectionDots />
+          <Navbar navigation={navigation} brandSub={brandSub} summaryHref={summaryHref} homeId={sections[0].id} />
+          <SectionDots navigation={navigation} />
           <main id="main">
             {sections.map(({ id, Component }) => (
               <Component key={id} />
@@ -37,14 +47,15 @@ function Body() {
           <Footer />
         </>
       )}
-    </>
+    </div>
   );
 }
 
-export function PageShell() {
+export function PageShell(props: ShellProps) {
+  const total = (props.sections ?? defaultSections).length;
   return (
-    <PresentationProvider total={sections.length}>
-      <Body />
+    <PresentationProvider total={total}>
+      <Body {...props} />
     </PresentationProvider>
   );
 }

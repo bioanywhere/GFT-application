@@ -1,4 +1,16 @@
-export const fit = {
+import type { IconName } from "./types";
+
+export interface FitData {
+  headline: string;
+  intro: string;
+  role: string;
+  mission: string;
+  responsibilities: string[];
+  collaborators: { id: string; name: string; icon: IconName; how: string }[];
+  complementNote: string;
+}
+
+export const fit: FitData = {
   headline: "Complementing GFT's AI Leadership. Expanding Its Business Potential.",
   intro:
     "The proposed function does not own platforms, engineering, or delivery. It owns the pipeline of new AI businesses and works through the teams that already make GFT strong.",

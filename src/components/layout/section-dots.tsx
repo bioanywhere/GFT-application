@@ -1,13 +1,14 @@
 "use client";
 
-import { navigation } from "@/content";
+import { useMemo } from "react";
+import { navigation as defaultNavigation } from "@/content";
+import type { NavItem } from "@/components/layout/types";
 import { cn, scrollToSection } from "@/lib/utils";
 import { useActiveSection } from "@/hooks/use-active-section";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
-const ids: string[] = navigation.map((n) => n.id);
-
-export function SectionDots() {
+export function SectionDots({ navigation = defaultNavigation }: { navigation?: readonly NavItem[] }) {
+  const ids = useMemo<string[]>(() => navigation.map((n) => n.id), [navigation]);
   const active = useActiveSection(ids);
   return (
     <TooltipProvider delayDuration={100}>

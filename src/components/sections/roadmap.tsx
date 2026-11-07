@@ -3,20 +3,28 @@
 import { useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { CheckCircle2, Package } from "lucide-react";
-import { roadmap } from "@/content";
+import { roadmap as defaultRoadmap, type RoadmapData } from "@/content";
 import { cn } from "@/lib/utils";
 import { Section, SectionHeading } from "@/components/layout/section";
 import { Reveal } from "@/components/layout/reveal";
 
-export function RoadmapSection() {
+export interface RoadmapViewProps {
+  id?: string;
+  eyebrow?: string;
+  data?: RoadmapData;
+  tone?: "default" | "elevated";
+}
+
+export function RoadmapSection({ id = "roadmap", eyebrow = "08 · First 90 Days at GFT", data = defaultRoadmap, tone = "elevated" }: RoadmapViewProps) {
+  const roadmap = data;
   const [active, setActive] = useState(0);
   const reduce = useReducedMotion();
   const phase = roadmap.phases[active];
 
   return (
-    <Section id="roadmap" tone="elevated">
+    <Section id={id} tone={tone}>
       <Reveal>
-        <SectionHeading eyebrow="08 · First 90 Days at GFT" title={roadmap.headline} intro={roadmap.intro} />
+        <SectionHeading eyebrow={eyebrow} title={roadmap.headline} intro={roadmap.intro} />
       </Reveal>
 
       <Reveal delay={0.1} className="mt-12">

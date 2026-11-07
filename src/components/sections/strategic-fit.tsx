@@ -2,22 +2,31 @@
 
 import { useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { fit } from "@/content";
+import { fit as defaultFit, type FitData } from "@/content";
 import { cn } from "@/lib/utils";
 import { Section, SectionHeading } from "@/components/layout/section";
 import { Reveal } from "@/components/layout/reveal";
 import { Icon } from "@/components/ui/icon";
 
-export function StrategicFitSection() {
+export interface StrategicFitProps {
+  id?: string;
+  eyebrow?: string;
+  data?: FitData;
+  tone?: "default" | "elevated";
+  centerLabel?: { top: string; main: string };
+}
+
+export function StrategicFitSection({ id = "fit", eyebrow = "09 · Strategic Fit with GFT", data = defaultFit, tone = "default", centerLabel = { top: "Head of", main: "AI Ventures & Business Innovation" } }: StrategicFitProps) {
+  const fit = data;
   const [activeId, setActiveId] = useState(fit.collaborators[0].id);
   const reduce = useReducedMotion();
   const active = fit.collaborators.find((c) => c.id === activeId)!;
   const n = fit.collaborators.length;
 
   return (
-    <Section id="fit">
+    <Section id={id} tone={tone}>
       <Reveal>
-        <SectionHeading eyebrow="09 · Strategic Fit with GFT" title={fit.headline} intro={fit.intro} />
+        <SectionHeading eyebrow={eyebrow} title={fit.headline} intro={fit.intro} />
       </Reveal>
 
       <div className="mt-12 grid gap-8 lg:grid-cols-[1fr_1fr]">
@@ -44,8 +53,8 @@ export function StrategicFitSection() {
               })}
             </svg>
             <div className="absolute left-1/2 top-1/2 flex size-28 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full bg-[linear-gradient(135deg,var(--accent-blue),var(--accent-violet))] p-3 text-center text-white shadow-[0_20px_60px_-20px_var(--glow)]">
-              <span className="text-[10px] uppercase tracking-[0.14em] opacity-80">Head of</span>
-              <span className="text-xs font-semibold leading-tight">AI Ventures & Business Innovation</span>
+              <span className="text-[10px] uppercase tracking-[0.14em] opacity-80">{centerLabel.top}</span>
+              <span className="text-xs font-semibold leading-tight">{centerLabel.main}</span>
             </div>
             {fit.collaborators.map((c, i) => {
               const a = (i / n) * Math.PI * 2 - Math.PI / 2;

@@ -38,7 +38,7 @@ export const site = {
     "Hi Andrés,\n\nI reviewed your AI Ventures & Business Innovation proposal for GFT Technologies and would like to schedule a conversation.\n\n",
 } as const;
 
-export function mailtoLink(subject = site.emailSubject, body = site.emailBody) {
+export function mailtoLink(subject: string = site.emailSubject, body: string = site.emailBody) {
   const params = new URLSearchParams({ subject, body });
   return `mailto:${site.candidate.email}?${params.toString().replace(/\+/g, "%20")}`;
 }

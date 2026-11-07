@@ -3,12 +3,12 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ChevronLeft, ChevronRight, Maximize2, Minimize2, X } from "lucide-react";
-import { sections } from "@/components/sections/registry";
+import type { SectionEntry } from "@/components/layout/types";
 import { usePresentation } from "./presentation-context";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-export function PresentationMode() {
+export function PresentationMode({ sections }: { sections: readonly SectionEntry[] }) {
   const { active, index, close, next, prev, goTo, total } = usePresentation();
   const reduce = useReducedMotion();
   const [dir, setDir] = useState<1 | -1>(1);

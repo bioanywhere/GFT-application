@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { motion } from "motion/react";
 import { FileText, Menu, Presentation } from "lucide-react";
-import { navigation, site } from "@/content";
+import { navigation as defaultNavigation, site } from "@/content";
+import type { NavItem } from "@/components/layout/types";
 import { cn, scrollToSection } from "@/lib/utils";
 import { useActiveSection } from "@/hooks/use-active-section";
 import { useScrollProgress } from "@/hooks/use-scroll-progress";
@@ -13,9 +14,20 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetDescription, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { ThemeToggle } from "./theme-toggle";
 
-const ids: string[] = navigation.map((n) => n.id);
+export interface NavbarProps {
+  navigation?: readonly NavItem[];
+  brandSub?: string;
+  summaryHref?: string | null;
+  homeId?: string;
+}
 
-export function Navbar() {
+export function Navbar({
+  navigation = defaultNavigation,
+  brandSub = "AI Ventures Proposal · GFT",
+  summaryHref = "/executive-summary",
+  homeId = "proposal",
+}: NavbarProps) {
+  const ids = useMemo<string[]>(() => navigation.map((n) => n.id), [navigation]);
   const active = useActiveSection(ids);
   const progress = useScrollProgress();
   const presentation = usePresentation();
@@ -27,11 +39,11 @@ export function Navbar() {
   };
 
   return (
-    <header className="no-print fixed inset-x-0 top-0 z-[70]">
+    <header className="no-print fixed inset-x-0 top-10 z-[70]">
       <div className="glass border-x-0 border-t-0">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-5 sm:px-8 lg:px-12">
           <button
-            onClick={() => go("proposal")}
+            onClick={() => go(homeId)}
             className="flex items-center gap-3 text-left focus-visible:outline-2 focus-visible:outline-(--ring) rounded-md"
             aria-label="Back to top"
           >
@@ -40,7 +52,7 @@ export function Navbar() {
             </span>
             <span className="hidden flex-col leading-tight md:flex xl:hidden 2xl:flex">
               <span className="whitespace-nowrap text-sm font-semibold">{site.candidate.name}</span>
-              <span className="whitespace-nowrap text-[10px] uppercase tracking-[0.18em] text-muted">AI Ventures Proposal · GFT</span>
+              <span className="whitespace-nowrap text-[10px] uppercase tracking-[0.18em] text-muted">{brandSub}</span>
             </span>
           </button>
 
@@ -64,16 +76,18 @@ export function Navbar() {
           </nav>
 
           <div className="flex items-center gap-1.5">
+            {summaryHref && (<>
             <Button variant="outline" size="sm" asChild className="hidden md:inline-flex xl:hidden 2xl:inline-flex">
-              <Link href="/executive-summary">
+              <Link href={summaryHref}>
                 <FileText /> Executive Summary
               </Link>
             </Button>
             <Button variant="outline" size="icon" asChild className="hidden xl:inline-flex 2xl:hidden" aria-label="Executive Summary">
-              <Link href="/executive-summary" title="Executive Summary">
+              <Link href={summaryHref} title="Executive Summary">
                 <FileText />
               </Link>
             </Button>
+            </>)}
             <Button variant="gradient" size="sm" onClick={() => presentation.open(ids.indexOf(active))} className="hidden sm:inline-flex">
               <Presentation /> Presentation Mode
             </Button>
@@ -106,9 +120,11 @@ export function Navbar() {
                   <Button variant="gradient" onClick={() => { setOpen(false); presentation.open(ids.indexOf(active)); }}>
                     <Presentation /> Presentation Mode
                   </Button>
+                  {summaryHref && (
                   <Button variant="outline" asChild>
-                    <Link href="/executive-summary"><FileText /> Executive Summary</Link>
+                    <Link href={summaryHref}><FileText /> Executive Summary</Link>
                   </Button>
+                  )}
                 </div>
               </SheetContent>
             </Sheet>
