@@ -14,7 +14,7 @@ export function CompareHeroSection() {
   const fade = (delay: number) => ({ initial: reduce ? false : { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] as const } });
   const roles = [compareRoles.ai, compareRoles.ventures];
   return (
-    <section id="cmp-hero" data-section="cmp-hero" className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden pt-32 pb-10 sm:pt-36">
+    <section id="cmp-hero" data-section="cmp-hero" className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden pt-24 pb-10 sm:pt-28">
       <div className="bg-grid bg-grid-fade absolute inset-0 -z-10" aria-hidden />
       <div className="absolute -left-40 top-20 -z-10 size-[520px] rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--accent-cyan)_22%,transparent),transparent_65%)] blur-3xl" aria-hidden />
       <div className="absolute -right-40 bottom-0 -z-10 size-[520px] rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--accent-magenta)_22%,transparent),transparent_65%)] blur-3xl" aria-hidden />

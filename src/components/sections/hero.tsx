@@ -17,7 +17,7 @@ export function HeroSection() {
   });
 
   return (
-    <section id="proposal" data-section="proposal" className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden pt-32 pb-10 sm:pt-36">
+    <section id="proposal" data-section="proposal" className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden pt-24 pb-10 sm:pt-28">
       <div className="bg-grid bg-grid-fade absolute inset-0 -z-10" aria-hidden />
       <div className="absolute -left-40 top-20 -z-10 size-[520px] rounded-full bg-[radial-gradient(circle,var(--glow),transparent_65%)] blur-3xl" aria-hidden />
       <div className="absolute -right-40 bottom-0 -z-10 size-[520px] rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--accent-magenta)_25%,transparent),transparent_65%)] blur-3xl" aria-hidden />

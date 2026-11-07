@@ -19,7 +19,7 @@ export function Section({
       id={id}
       data-section={id}
       className={cn(
-        "relative scroll-mt-28 py-20 sm:py-28 lg:py-32",
+        "relative scroll-mt-20 py-20 sm:py-28 lg:py-32",
         tone === "elevated" && "bg-background-elevated/60",
         className,
       )}

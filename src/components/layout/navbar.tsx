@@ -13,6 +13,7 @@ import { usePresentation } from "@/components/interactive/presentation-context";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetDescription, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { ThemeToggle } from "./theme-toggle";
+import { ProposalSwitcher } from "./proposal-tabs";
 
 export interface NavbarProps {
   navigation?: readonly NavItem[];
@@ -39,7 +40,7 @@ export function Navbar({
   };
 
   return (
-    <header className="no-print fixed inset-x-0 top-10 z-[70]">
+    <header className="no-print fixed inset-x-0 top-0 z-[70]">
       <div className="glass border-x-0 border-t-0">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-5 sm:px-8 lg:px-12">
           <button
@@ -50,12 +51,13 @@ export function Navbar({
             <span className="relative flex size-8 items-center justify-center rounded-lg bg-[linear-gradient(135deg,var(--accent-blue),var(--accent-magenta))] text-xs font-bold text-white">
               AG
             </span>
-            <span className="hidden flex-col leading-tight md:flex">
+            <span className="hidden flex-col leading-tight lg:flex">
               <span className="whitespace-nowrap text-sm font-semibold">{site.candidate.name}</span>
               <span className="whitespace-nowrap text-[10px] uppercase tracking-[0.18em] text-muted">{brandSub}</span>
             </span>
           </button>
 
+          <ProposalSwitcher className="hidden md:flex" />
 
           <div className="flex items-center gap-1.5">
             {summaryHref && (<>
@@ -77,7 +79,8 @@ export function Navbar({
               </SheetTrigger>
               <SheetContent>
                 <SheetTitle className="text-sm font-semibold">Navigate the proposal</SheetTitle>
-                <SheetDescription className="text-xs text-muted">Jump to any section.</SheetDescription>
+                <SheetDescription className="text-xs text-muted">Switch proposal or jump to any section.</SheetDescription>
+                <ProposalSwitcher className="mt-4 w-full justify-between md:hidden" layoutId="proposal-tab-pill-sheet" onNavigate={() => setOpen(false)} />
                 <nav className="mt-6 flex flex-col gap-1" aria-label="Sections">
                   {navigation.map((item, i) => (
                     <button

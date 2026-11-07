@@ -6,6 +6,7 @@ import { aiClosing, aiContext, aiDomains, aiHero, aiMandate, aiOperatingModel, a
 import { Button } from "@/components/ui/button";
 import { PrintButton } from "@/components/interactive/print-button";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
+import { ProposalSwitcher } from "@/components/layout/proposal-tabs";
 import { LinkedinIcon } from "@/components/ui/linkedin-icon";
 
 export const metadata: Metadata = {
@@ -27,9 +28,10 @@ function Block({ number, title, children }: { number: string; title: string; chi
 export default function HeadOfAiSummaryPage() {
   return (
     <div className="theme-ai min-h-dvh bg-background print:bg-white">
-      <header className="no-print sticky top-10 z-50 glass">
+      <header className="no-print sticky top-0 z-50 glass">
         <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-5">
           <Button variant="ghost" size="sm" asChild><Link href="/head-of-ai"><ArrowLeft /> Back to proposal</Link></Button>
+          <ProposalSwitcher className="hidden md:flex" />
           <div className="flex items-center gap-2"><PrintButton /><ThemeToggle /></div>
         </div>
       </header>
