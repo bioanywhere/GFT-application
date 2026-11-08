@@ -30,7 +30,7 @@ export function AiSummary({ locale }: { locale: Locale }) {
       <div className="theme-ai min-h-dvh bg-background print:bg-white">
         <header className="no-print sticky top-0 z-50 glass">
           <div className="mx-auto flex h-14 max-w-5xl items-center justify-between gap-3 px-5">
-            <Button variant="ghost" size="sm" asChild><Link href={localePath("/head-of-ai", locale)}><ArrowLeft /> {s.backToProposal}</Link></Button>
+            <Button variant="ghost" size="sm" asChild><Link href={localePath("/", locale)}><ArrowLeft /> {s.backToProposal}</Link></Button>
             <ProposalSwitcher className="hidden md:flex" />
             <div className="flex items-center gap-2">
               <PrintButton />

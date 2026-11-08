@@ -18,8 +18,8 @@ const navLabels: Record<(typeof enCompareNavigation)[number]["id"], string> = {
 export const compareNavigation = enCompareNavigation.map((n) => ({ id: n.id, label: navLabels[n.id] }));
 
 export const compareRoles: typeof enCompareRoles = {
-  ai: { id: "ai", name: "CAIO — Chief AI Officer", short: "CAIO", tagline: "Hacer que la IA funcione con eficacia en toda la organización.", orientation: "Orientado a la ejecución", color: "var(--accent-cyan)", color2: "var(--accent-emerald)", href: "/head-of-ai", icon: "Cpu" },
-  ventures: { id: "ventures", name: "Chief AI Ventures Officer (CAIVO)", short: "CAIVO", tagline: "Convertir la IA en nuevas oportunidades de negocio e ingresos.", orientation: "Orientado al crecimiento", color: "var(--accent-violet)", color2: "var(--accent-magenta)", href: "/", icon: "Rocket" },
+  ai: { id: "ai", name: "CAIO — Chief AI Officer", short: "CAIO", tagline: "Hacer que la IA funcione con eficacia en toda la organización.", orientation: "Orientado a la ejecución", color: "var(--accent-cyan)", color2: "var(--accent-emerald)", href: "/", icon: "Cpu" },
+  ventures: { id: "ventures", name: "Chief AI Ventures Officer (CAIVO)", short: "CAIVO", tagline: "Convertir la IA en nuevas oportunidades de negocio e ingresos.", orientation: "Orientado al crecimiento", color: "var(--accent-violet)", color2: "var(--accent-magenta)", href: "/ai-ventures", icon: "Rocket" },
 };
 
 export const compareHero: typeof enCompareHero = {

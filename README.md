@@ -6,8 +6,8 @@ contributions and a comparison between them:
 
 | Tab | English | Spanish | Orientation |
 | --- | --- | --- | --- |
-| Chief AI Ventures Officer (CAIVO) | `/` | `/es` | Growth: identify, build, and commercialize new AI businesses |
-| CAIO — Chief AI Officer | `/head-of-ai` | `/es/head-of-ai` | Execution: AI strategy, engineering, adoption, governance, scale |
+| CAIO — Chief AI Officer | `/` | `/es` | Execution: AI strategy, engineering, adoption, governance, scale |
+| Chief AI Ventures Officer (CAIVO) | `/ai-ventures` | `/es/ai-ventures` | Growth: identify, build, and commercialize new AI businesses |
 | Compare Both | `/compare` | `/es/compare` | Side-by-side comparison, focus visualization, impact explorer, priority guide |
 
 Every page is available in English and Spanish. The EN / ES toggle in the navigation bar switches the
@@ -91,7 +91,7 @@ CAIVO proposal content:
 
 - Sticky navigation with scroll progress and section indicator
 - **Presentation Mode**: fullscreen slides, arrow-key navigation, Esc to exit
-- **Executive Summary** at `/executive-summary` and `/head-of-ai/executive-summary`: one-page, print-friendly, exportable to PDF
+- **Executive Summary** at `/executive-summary` (CAIO) and `/ai-ventures/executive-summary` (CAIVO): one-page, print-friendly, exportable to PDF
 - Proposal tab bar on every page; each proposal has its own section navigation, progress indicator and presentation mode
 - CAIO uses an execution palette (blue → cyan → emerald) via the `theme-ai` class; AI Ventures keeps blue → violet → magenta
 - Interactive AI Business Opportunity Engine (clickable stages)

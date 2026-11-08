@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { VenturesShell } from "@/components/sections/shell";
+import { HeadOfAiShell } from "@/components/head-of-ai/shell";
 import { pageMeta } from "@/content/meta";
 import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = pageMetadata("/", "en", pageMeta.en.ventures.title, pageMeta.en.ventures.description);
+export const metadata: Metadata = pageMetadata("/", "en", pageMeta.en.ai.title, pageMeta.en.ai.description);
 
-export default function Home() {
-  return <VenturesShell locale="en" />;
+export default function HeadOfAiPage() {
+  return <HeadOfAiShell locale="en" />;
 }

@@ -4,10 +4,10 @@ import { localePath, locales } from "@/content/locale";
 
 const paths = [
   { path: "/", priority: 1 },
-  { path: "/head-of-ai", priority: 0.9 },
+  { path: "/ai-ventures", priority: 0.9 },
   { path: "/compare", priority: 0.9 },
   { path: "/executive-summary", priority: 0.7 },
-  { path: "/head-of-ai/executive-summary", priority: 0.7 },
+  { path: "/ai-ventures/executive-summary", priority: 0.7 },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

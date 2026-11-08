@@ -57,8 +57,8 @@ export function CompareGuideSection() {
             {lean === "both" && <p className="text-sm leading-relaxed"><span className="font-semibold">{ui.cmp.guideBoth}</span> {ui.cmp.guideBothText}</p>}
           </div>
           <div className="mt-5 flex flex-wrap gap-2">
-            <Button variant={lean === "ai" ? "gradient" : "outline"} size="sm" asChild><Link href={localePath("/head-of-ai", locale)}>{ui.cmp.guideAiLink} <ArrowRight /></Link></Button>
-            <Button variant={lean === "ventures" ? "gradient" : "outline"} size="sm" asChild><Link href={localePath("/", locale)}>{ui.cmp.guideVenturesLink} <ArrowRight /></Link></Button>
+            <Button variant={lean === "ai" ? "gradient" : "outline"} size="sm" asChild><Link href={localePath("/", locale)}>{ui.cmp.guideAiLink} <ArrowRight /></Link></Button>
+            <Button variant={lean === "ventures" ? "gradient" : "outline"} size="sm" asChild><Link href={localePath("/ai-ventures", locale)}>{ui.cmp.guideVenturesLink} <ArrowRight /></Link></Button>
           </div>
           <p className="mt-4 text-[11px] text-muted">{ui.cmp.guideNote}</p>
         </Reveal>

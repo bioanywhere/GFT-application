@@ -392,7 +392,7 @@ export const closing: typeof enClosing = {
 };
 
 export const proposals: ProposalTab[] = [
-  { id: "ventures", path: "/", label: "Chief AI Ventures Officer", short: "CAIVO", title: "Chief AI Ventures Officer (CAIVO)", tone: "growth" },
-  { id: "ai", path: "/head-of-ai", label: "Chief AI Officer", short: "CAIO", title: "CAIO — Chief AI Officer", tone: "execution" },
+  { id: "ai", path: "/", label: "Chief AI Officer", short: "CAIO", title: "CAIO — Chief AI Officer", tone: "execution" },
+  { id: "ventures", path: "/ai-ventures", label: "Chief AI Ventures Officer", short: "CAIVO", title: "Chief AI Ventures Officer (CAIVO)", tone: "growth" },
   { id: "compare", path: "/compare", label: "Comparar ambas", short: "Comparar", title: "Comparación estratégica", tone: "neutral" },
 ];

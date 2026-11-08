@@ -4,7 +4,7 @@ import { pageMeta } from "@/content/meta";
 import type { Locale } from "@/content/locale";
 
 export function rootMetadata(locale: Locale): Metadata {
-  const m = pageMeta[locale].ventures;
+  const m = pageMeta[locale].ai;
   return {
     metadataBase: new URL(site.url),
     title: { default: m.title, template: "%s" },

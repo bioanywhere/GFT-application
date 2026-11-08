@@ -1,8 +1,7 @@
 import { ImageResponse } from "next/og";
 import { site } from "@/content/site";
-import { hero } from "@/content/hero";
 
-export const alt = `${site.primaryPosition} · Executive proposal for GFT Technologies`;
+export const alt = "Executive proposals for GFT Technologies: CAIO — Chief AI Officer and Chief AI Ventures Officer (CAIVO)";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -23,13 +22,13 @@ export default function OpenGraphImage() {
         }}
       >
         <div style={{ display: "flex", fontSize: 20, letterSpacing: 6, textTransform: "uppercase", color: "#9aa5bf" }}>
-          {hero.eyebrow}
+          Executive proposals for GFT Technologies
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
           <div style={{ display: "flex", fontSize: 64, fontWeight: 700, lineHeight: 1.05, letterSpacing: -2, maxWidth: 1000 }}>
-            Turning Artificial Intelligence Into New Business Opportunities.
+            Making AI work across GFT. Turning AI into new business.
           </div>
-          <div style={{ display: "flex", fontSize: 30, color: "#9b7bff" }}>{site.primaryPosition}</div>
+          <div style={{ display: "flex", fontSize: 28, color: "#9b7bff" }}>CAIO — Chief AI Officer · Chief AI Ventures Officer (CAIVO)</div>
         </div>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end" }}>
           <div style={{ display: "flex", flexDirection: "column" }}>

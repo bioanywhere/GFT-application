@@ -9,7 +9,7 @@ export const compareRoles = {
     orientation: "Execution-oriented",
     color: "var(--accent-cyan)",
     color2: "var(--accent-emerald)",
-    href: "/head-of-ai",
+    href: "/",
     icon: "Cpu" as IconName,
   },
   ventures: {
@@ -20,7 +20,7 @@ export const compareRoles = {
     orientation: "Growth-oriented",
     color: "var(--accent-violet)",
     color2: "var(--accent-magenta)",
-    href: "/",
+    href: "/ai-ventures",
     icon: "Rocket" as IconName,
   },
 };
